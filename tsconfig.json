@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "module": "ESNext",
+    "target": "ES2020",
+    "lib": ["ESNext", "DOM"],
+    "allowJs": true,
+    "jsx": "preserve",
+    "moduleResolution": "node",
+    //npm install -D @styled/typescript-styled-plugin
+    "plugins": [
+      {
+        "name": "@styled/typescript-styled-plugin",
+        "lint": {
+          "validProperties": ["label"]
+        }
+      }
+    ],
+    //routing을 위한 환경 설정
+    "baseUrl": ".", // 초기 위치(tsconfig.json의  위치, 프로젝트 최상단)
+    "paths": { 
+      "@/*": ["src/*"]  // 경로의 alias를 추가
+    }
+  }
+}
