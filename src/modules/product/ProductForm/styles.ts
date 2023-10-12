@@ -23,14 +23,15 @@ export const StyledProductForm = styled.div`
 
   label > span {
     display: inline-block;
-    width: 150px;
+    width: 120px;
     font-size: 20px;
   }
 
   label > input {
-    width: 400px;
+    width: 100%;
     margin-left: 0;
-    height: 25px;
+    height: 40px;
+    border-radius: 4px;
   }
 
   select {

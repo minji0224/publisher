@@ -33,7 +33,8 @@ const ProductForm = () => {
       <label><span>도서명</span><input type="text" /></label>
       <label><span>저자</span><input type="text" /></label>
       <label><span>출간일달력?</span><input type="text" /></label>
-      <label><span>정가</span><input type="text" /></label>   
+      <label><span>정가</span><input type="text" /></label>
+      <label><span>수량</span><input type="text" /></label>   
       <label><span>isbn번호</span><input type="text" /></label>
       <label><span>이미지</span><input type="text" /></label>
       </form>
