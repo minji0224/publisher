@@ -1,12 +1,12 @@
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
-import { LayoutStyle } from "./LayoutStyle";
+import { StyledLayout } from "./styles";
 import { Sidebar } from "../sidebar";
 
 function Layout() {
 
   return (
-    <LayoutStyle>
+    <StyledLayout>
     <div id="container">
       <header>
         <p>ㅇㅇㅇ출판사</p>
@@ -15,14 +15,13 @@ function Layout() {
       <div id="box">
         <Sidebar />
         <main>
-          <p>렌더링할곳</p>
           <Suspense fallback={<div>...Suspense 로딩 중...</div>}>
             <Outlet />
           </Suspense>
         </main>
       </div>
     </div>
-    </LayoutStyle>
+    </StyledLayout>
   )
 
 }

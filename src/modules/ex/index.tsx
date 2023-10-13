@@ -1,8 +1,9 @@
+import BarChart from "@/components/Chart/BarChart";
 import LineChart from "@/components/Chart/LineChart";
 import PieChart from "@/components/Chart/PieChart";
-import { StyledChart } from "@/components/Chart/styles";
 
-const Home = () => {
+const ChartList = () => {
+
   const pieData = 
   [
     {
@@ -187,23 +188,21 @@ const Home = () => {
 
 
   return (
-  <StyledChart>
-  <div id="container">   
-    <div id="box">
-      <div id="div">여기에 ㅇㅇ출판사님 어쩌구 넣기</div>
-      <div id="lineChart">
-        <LineChart data={lineData} />
-      </div>
-    </div>
-    <div id="pieChart">
+  <div style={{display: 'flex'}}>
+    <div style={{height:'600px', width: '600px', border:'1px solid black'}}>
       <PieChart data={pieData} />
     </div>
+    {/* <div style={{border:'1px solid black', height: '300px'}}>
+      <BarChart data={barData}/>
+    </div>   */}
+    <div style={{border:'1px solid black', height: '500px', width: '700px'}}>
+      <LineChart data={lineData} />
+    </div>
   </div>
-  </StyledChart>
     
 
 
   )
 };
 
-export default Home;
+export default ChartList;

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyledSidebar } from "./styled";
+import { StyledSidebar } from "./styles";
 import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
@@ -26,16 +26,15 @@ export function Sidebar() {
     <StyledSidebar>
     <div>
       <ul>
-        <li onClick={productMenu}>재고관리{productListIcon}</li>
+        <li><p>홈</p></li>
+        <li onClick={productMenu}><p>재고관리</p>{productListIcon}</li>
         {productList && (
           <ul>
-            <li> <Link to="/product">도서등록</Link></li>
-            <li>도서재고</li>
+            <li> <Link to="/productForm">도서등록</Link></li>
+            <li> <Link to="/productList">도서재고</Link></li>
           </ul>
         )}
-      </ul>
-      <ul>
-        <li onClick={toggleMenu}>통계관리{statisticsListIcon}</li>
+        <li onClick={toggleMenu}><p>통계관리</p>{statisticsListIcon}</li>
         {statisticsList && (
           <ul>
             <li>어쩌구</li>
@@ -43,6 +42,7 @@ export function Sidebar() {
           </ul>
         )}
       </ul>
+
     </div>
     </StyledSidebar>
 

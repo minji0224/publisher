@@ -1,6 +1,42 @@
+import { MutableRefObject, Suspense, useRef } from "react";
 import { StyledProductForm } from "./styles";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useProductsData } from "../productdata";
 
 const ProductForm = () => {
+
+  const navigate = useNavigate();
+
+  const titleRef = useRef() as MutableRefObject<HTMLInputElement>;
+  const publisherRef = useRef() as MutableRefObject<HTMLInputElement>;
+  const authorRef = useRef() as MutableRefObject<HTMLInputElement>;
+  const isbnRef = useRef() as MutableRefObject<HTMLInputElement>;
+  const itemCountRef = useRef() as MutableRefObject<HTMLInputElement>;
+  const priceRef = useRef() as MutableRefObject<HTMLInputElement>;
+  const imgRef = useRef() as MutableRefObject<HTMLInputElement>;
+  const pubDateRef = useRef() as MutableRefObject<HTMLInputElement>;
+  const categoryRef = useRef() as MutableRefObject<HTMLInputElement>;
+
+  const { data, createProductData, isValidating } = useProductsData();
+  console.log("---- From페이지 데이터");
+  console.log(data);
+  
+  
+
+  const handleSave = () => {
+    // 1.검증 2.서버연동 3.상태값변경해야함
+
+    createProductData({
+      publisher: pubDateRef.current.value,
+      title: titleRef.current.value,
+      author: authorRef.current.value,
+      isbn: isbnRef.current.value,
+      itemCount: itemCountRef.current.value,
+      price: priceRef.current.value,
+    });
+    // navigate("/");
+  }
+
   return (
     <StyledProductForm>
     <div>
@@ -30,15 +66,15 @@ const ProductForm = () => {
           <option value="수험서">수험서</option>
         </select>
       </label>
-      <label><span>도서명</span><input type="text" /></label>
-      <label><span>저자</span><input type="text" /></label>
-      <label><span>출간일달력?</span><input type="text" /></label>
-      <label><span>정가</span><input type="text" /></label>
-      <label><span>수량</span><input type="text" /></label>   
-      <label><span>isbn번호</span><input type="text" /></label>
-      <label><span>이미지</span><input type="text" /></label>
+      <label><span>도서명</span><input type="text" ref={titleRef}/></label>
+      <label><span>저자</span><input type="text" ref={authorRef}/></label>
+      <label><span>출간일달력?</span><input type="text" ref={pubDateRef}/></label>
+      <label><span>정가</span><input type="text" ref={priceRef}/></label>
+      <label><span>수량</span><input type="text" ref={itemCountRef}/></label>   
+      <label><span>isbn번호</span><input type="text" ref={isbnRef}/></label>
+      <label><span>이미지</span><input type="file" /></label>
       </form>
-      <button>등록</button>
+      <button onClick={handleSave}>등록</button>
     </div>
     </StyledProductForm>
   )
