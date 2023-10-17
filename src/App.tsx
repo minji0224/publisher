@@ -1,24 +1,23 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Layout from "./components/layout/Layout";
 import Home from "./pages/Home";
-import ProductForm from "./modules/product/ProductForm";
-// import ProductList from "./modules/product/ProductList";
 import { lazy } from "react";
+import Login from "./pages/Login/intex";
+import BookForm from "./modules/book/BookForm";
 
-const ProductList = lazy(()=> import("./modules/product/ProductList/index"))
+const BookList = lazy(()=> import("./modules/book/BookList/index"))
 
 const App = () => {
   return (
     <BrowserRouter>
-      <Routes>
+      <Routes>  
+        <Route path="login" element={<Login />} />
         <Route path="/" element={<Layout />}>
           <Route element={<Home />} index/>
-          <Route path="productForm" element={<ProductForm />} />
-          <Route path="productList" element={<ProductList />} />
-
-
-
+          <Route path="bookForm" element={<BookForm />} />
+          <Route path="bookList" element={<BookList />} />
         </Route>
+        
       </Routes> 
     </BrowserRouter>
   )

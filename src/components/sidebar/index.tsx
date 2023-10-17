@@ -26,12 +26,12 @@ export function Sidebar() {
     <StyledSidebar>
     <div>
       <ul>
-        <li><p>홈</p></li>
+        <li><Link to={"/"}>홈</Link></li>
         <li onClick={productMenu}><p>재고관리</p>{productListIcon}</li>
         {productList && (
           <ul>
-            <li> <Link to="/productForm">도서등록</Link></li>
-            <li> <Link to="/productList">도서재고</Link></li>
+            <li> <Link to="/bookForm">도서등록</Link></li>
+            <li> <Link to="/bookList">도서재고</Link></li>
           </ul>
         )}
         <li onClick={toggleMenu}><p>통계관리</p>{statisticsListIcon}</li>

@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { useProductsData } from "../productdata"
-import { StyledProductList } from "./styles";
+import { useBooksData, } from "../bookdata"
+import { StyledBookList } from "./styles";
 
-const ProductList = () => {
+const BookList = () => {
 
-  const {data, isValidating} = useProductsData();
+  const {data, isValidating} = useBooksData();
   console.log(`데이터 불러오고 있는지 ${isValidating}`);
   console.log(data);
   console.log(data.length);
@@ -13,7 +13,7 @@ const ProductList = () => {
   
 
   return (
-    <StyledProductList>
+    <StyledBookList>
     <div>
       <div>재고 날짜/이름별 조회 넣기</div>
       
@@ -54,8 +54,8 @@ const ProductList = () => {
       <button>다음</button>
     </div>
     </div>
-    </StyledProductList>
+    </StyledBookList>
   )
 }
 
-export default ProductList
+export default BookList

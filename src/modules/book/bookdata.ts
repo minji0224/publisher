@@ -1,12 +1,12 @@
 import axios from "axios";
 import useSWR, { mutate } from "swr";
 
-const INIT_DATA: ProductData[] = [];
-const PRODUCT_DATA_KEY = "/products";
+const INIT_DATA: BookData[] = [];
+const BOOK_DATA_KEY = "/books";
 // Axios인스턴스 생성(백엔드 API와 통신)
-const productApi = axios.create({ baseURL: "http://localhost:9090" });
+const bookApi = axios.create({ baseURL: "http://localhost:9090" });
 
-interface ProductData {
+interface BookData {
   id?: number;
   publisher: string;
   title: string;
@@ -28,10 +28,10 @@ interface ProductData {
     -> 여기 url매개변수는 useSWR의 첫번째 인자에서 받음
     -> awios는 .data에 get으로 가져온 데이터가 들어감.
 */
-const productsFetcher = async ([key]) => {
-  console.log("productFetcher함수");
+const booksFetcher = async ([key]) => {
+  console.log("booksFetcher함수");
   try {
-    const response = await productApi.get<ProductData[]>(
+    const response = await bookApi.get<BookData[]>(
       `${key}?_sort=id?_sort=id&_order=desc`
     );
     console.log(`패처함수내의 key값: ${key}`);
@@ -44,10 +44,10 @@ const productsFetcher = async ([key]) => {
   }
 };
 
-export const useProductsData = () => {
-  const { data, mutate, isValidating } = useSWR<ProductData[]>(
-    [PRODUCT_DATA_KEY],
-    productsFetcher,
+export const useBooksData = () => {
+  const { data, mutate, isValidating } = useSWR<BookData[]>(
+    [BOOK_DATA_KEY],
+    booksFetcher,
     {
       fallbackData: INIT_DATA,
       revalidateOnFocus: false,
@@ -57,8 +57,8 @@ export const useProductsData = () => {
   console.log("---1");
   console.log(data);
 
-  function createProductData(newBook: ProductData) {
-    mutate(async (prevData: ProductData[] = [...INIT_DATA]) => {
+  function createBookData(newBook: BookData) {
+    mutate(async (prevData: BookData[] = [...INIT_DATA]) => {
       console.log("---mutate이전데이터");
 
       console.log(prevData);
@@ -66,7 +66,7 @@ export const useProductsData = () => {
       let nextData = [...prevData];
 
       try {
-        const response = await productApi.post(PRODUCT_DATA_KEY, newBook);
+        const response = await bookApi.post(BOOK_DATA_KEY, newBook);
         console.log(response.data);
 
         if (response.status === 201) {
@@ -83,5 +83,5 @@ export const useProductsData = () => {
   console.log("---2");
   console.log(data);
 
-  return { data, createProductData, isValidating };
+  return { data, createBookData, isValidating };
 };

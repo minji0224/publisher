@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const StyledProductList = styled.div`
+export const StyledBookList = styled.div`
   div {
     padding: 20px;
   }

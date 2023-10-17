@@ -1,8 +1,16 @@
 import LineChart from "@/components/Chart/LineChart";
 import PieChart from "@/components/Chart/PieChart";
 import { StyledChart } from "@/components/Chart/styles";
+import { getCookie } from "@/utils/cookie";
 
 const Home = () => {
+
+  const token = getCookie("token");
+  console.log(token);
+  if (!token) {
+    window.location.href = "http://localhost:5000/login";
+  } 
+  
   const pieData = 
   [
     {

@@ -1,9 +1,9 @@
 import { MutableRefObject, Suspense, useRef } from "react";
-import { StyledProductForm } from "./styles";
+import { StyledBookForm, } from "./styles";
 import { Outlet, useNavigate } from "react-router-dom";
-import { useProductsData } from "../productdata";
+import { useBooksData } from "../bookdata";
 
-const ProductForm = () => {
+const BookForm = () => {
 
   const navigate = useNavigate();
 
@@ -17,7 +17,7 @@ const ProductForm = () => {
   const pubDateRef = useRef() as MutableRefObject<HTMLInputElement>;
   const categoryRef = useRef() as MutableRefObject<HTMLInputElement>;
 
-  const { data, createProductData, isValidating } = useProductsData();
+  const { data, createBookData, isValidating } = useBooksData();
   console.log("---- From페이지 데이터");
   console.log(data);
   
@@ -26,7 +26,7 @@ const ProductForm = () => {
   const handleSave = () => {
     // 1.검증 2.서버연동 3.상태값변경해야함
 
-    createProductData({
+    createBookData({
       publisher: pubDateRef.current.value,
       title: titleRef.current.value,
       author: authorRef.current.value,
@@ -38,7 +38,7 @@ const ProductForm = () => {
   }
 
   return (
-    <StyledProductForm>
+    <StyledBookForm>
     <div>
       <h3>신간도서등록</h3>
       <form action="">
@@ -76,8 +76,8 @@ const ProductForm = () => {
       </form>
       <button onClick={handleSave}>등록</button>
     </div>
-    </StyledProductForm>
+    </StyledBookForm>
   )
 };
 
-export default ProductForm;
+export default BookForm;

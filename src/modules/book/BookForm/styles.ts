@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const StyledProductForm = styled.div`
+export const StyledBookForm = styled.div`
   div {
     box-sizing: border-box;
     padding: 20px;
@@ -42,15 +42,15 @@ export const StyledProductForm = styled.div`
     width: 100%;
     margin-left: 0;
     height: 40px;
-    border-radius: 10px;
+    /* border-radius: 10px; */
     border: none;
-    border-bottom: 2px solid #e0e0e0;
+    border-bottom: 3px solid #e0e0e0;
     font-weight: 600;
     letter-spacing: 1px;
   }
 
-  label > input:focus {
-    border: 1px solid #e0e0e0;
+  input:focus {
+    outline: none;
   }
 
   select {
