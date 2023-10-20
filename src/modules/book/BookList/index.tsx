@@ -7,16 +7,15 @@ const BookList = () => {
   const {data, isValidating} = useBooksData();
   console.log(`데이터 불러오고 있는지 ${isValidating}`);
   console.log(data);
-  console.log(data.length);
-  
+  // console.log(data.length);
+ 
   
   
 
   return (
     <StyledBookList>
     <div>
-      <div>재고 날짜/이름별 조회 넣기</div>
-      
+      <div>재고 날짜/이름별 조회 넣기</div>   
        {isValidating ? ( <div>로딩중</div>) : (
       <table>
       <thead>
@@ -37,7 +36,7 @@ const BookList = () => {
               <td><p>{c.title}</p></td>
               <td><p>{c.author}</p></td>
               <td><p>출간일</p></td>
-              <td><p>{c.itemCount}</p></td>
+              <td><p>{c.quantity}</p></td>
               <td><p>{c.isbn}</p></td>
             </tr>
           ))

@@ -34,7 +34,7 @@ export const StyledSidebar = styled.div`
     border-radius: 10px;
   }
 
-  div > ul > li:first-child {
+  div > ul > li:first-of-type {
     background-color: #e0e0e0;
     border-radius: 10px;
   }

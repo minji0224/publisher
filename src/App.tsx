@@ -3,9 +3,10 @@ import Layout from "./components/layout/Layout";
 import Home from "./pages/Home";
 import { lazy } from "react";
 import Login from "./pages/Login/intex";
-import BookForm from "./modules/book/BookForm";
+// import BookForm from "./modules/book/BookForm";
 
 const BookList = lazy(()=> import("./modules/book/BookList/index"))
+const BookForm = lazy(()=> import("./modules/book/BookForm/index"))
 
 const App = () => {
   return (

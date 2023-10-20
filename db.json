@@ -1,5 +1,5 @@
 {
-  "products": [
+  "books": [
     {
       "id": 1,
       "publisher": "Publisher 1",
@@ -98,7 +98,26 @@
       "isbn": "ISBN 11",
       "itemCount": 10,
       "price": 20
+    },
+    {
+      "title": "ㅇㅇ",
+      "author": "ㅇㅇ",
+      "pubDate": "ㅇㅇ",
+      "categoryName": "사전",
+      "priceStandard": "ㅇㅇㅇ",
+      "isbn": "ㅇㅇ",
+      "quantity": "ㅇ",
+      "id": 12
+    },
+    {
+      "title": "ㅇㅇ",
+      "author": "ㅇㅇ",
+      "pubDate": "ㅇㅇ",
+      "categoryName": "문학",
+      "priceStandard": "ㅇㅇㅇ",
+      "isbn": "ㅇㅇ",
+      "quantity": "ㅇ",
+      "id": 13
     }
   ]
-  
 }
