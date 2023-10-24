@@ -1,62 +1,37 @@
 import { MutableRefObject, Suspense, useRef, useState, useEffect } from "react";
 import { StyledBookForm, } from "./styles";
 import { Outlet, useNavigate } from "react-router-dom";
-import { useBooksData } from "../bookdata";
+import { BookData, useBooksData } from "../bookdata";
 import axios from "axios";
 import{ProfileData} from "../profiledata"
 import { getCookie } from "@/utils/cookie";
-
-{/* <label>
-  <span>출판사</span>
-  {profiledata.length > 0 ? (
-    profiledata.map((c, inx) => (
-      <input type="text" disabled key={inx} value={c.publisherName} />
-    ))
-  ) : (<p>해당 출판사를 찾을 수 없습니다.</p>)
-}    
-</label> */}
-{/* <label htmlFor="">
-<span>출판사</span>
-  {!profiledata ? (
-    <p>로딩중</p>
-  ) : (
-    profiledata.length > 0 ? (
-      profiledata.map((c) => (
-        <input type="text"  key={c.id} value={c.publisherName} />
-      ))
-    ) : (
-      <p>해당 출판사를 찾을 수 없습니다.</p>
-    )
-  )}
-</label> */}
+import http from "@/utils/http";
 
 const BookForm = () => {
 
   const [categoryName, setCategoryName] = useState("사전");
   const handleCategoryNameValue = (e) => {
-    setCategoryName(e.target.value);
-    console.log(categoryName);    
+    setCategoryName(e.target.value);   
   };
 
   const navigate = useNavigate();
 
   const titleRef = useRef() as MutableRefObject<HTMLInputElement>;
-  const publisherRef = useRef() as MutableRefObject<HTMLInputElement>;
   const authorRef = useRef() as MutableRefObject<HTMLInputElement>;
   const isbnRef = useRef() as MutableRefObject<HTMLInputElement>;
   const quantityRef = useRef() as MutableRefObject<HTMLInputElement>;
   const priceStandardRef = useRef() as MutableRefObject<HTMLInputElement>;
-  const imgRef = useRef() as MutableRefObject<HTMLInputElement>;
+  const fileRef = useRef() as MutableRefObject<HTMLInputElement>;
   const pubDateRef = useRef() as MutableRefObject<HTMLInputElement>;
+  const formRef = useRef<HTMLFormElement>();
   
 
   const { data, createBookData, isValidating } = useBooksData();
   const[ profiledata, setProfileData] = useState<ProfileData>();
-  // console.log("---1");  
-  // console.log(profiledata);
+  const [books, setBooks] = useState<BookData[]>([]);
 
 
-
+  // 쿠키검증 http로 바꾸기
   useEffect(() => {
     (async () => {
       try{
@@ -66,8 +41,7 @@ const BookForm = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        if (response.status === 200) {
-          // console.log("200");        
+        if (response.status === 200) {      
           setProfileData(response.data);         
         }
       } catch (e:any) {
@@ -76,14 +50,46 @@ const BookForm = () => {
       }
     })();
   }, []);
-  // console.log("---3");   
-  // console.log(profiledata);
-  // if(profiledata) {
-  //   console.log(profiledata);
-  //   console.log(profiledata.publisherName);
-  // }
 
- 
+
+  const handleBook = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("file", fileRef.current.files[0]);
+
+    const createRequest = {
+      publisher: profiledata.publisherName,
+      categoryName: categoryName,
+      title: titleRef.current.value,
+      author: authorRef.current.value,
+      pubDate: pubDateRef.current.value,      
+      priceStandard: priceStandardRef.current.value,
+      quantity: quantityRef.current.value,
+      isbn: isbnRef.current.value,
+    }
+    formData.append("createRequest", new Blob([JSON.stringify(createRequest)],{ type: "application/json" } ));
+
+    (async()=> {
+      const response = await http.post<BookData>("books/with-file", formData);
+      console.log(response);
+      console.log();
+      
+
+      if(response.status === 201) {
+        console.log("201");
+        formRef.current.reset();
+        // setBooks이 필요한지
+        setBooks([{...response.data}, ...books]);
+        console.log(books);
+        
+        navigate("/")
+
+        
+      }
+      
+    })();
+  }
 
 
   const handleSave = () => {
@@ -92,14 +98,15 @@ const BookForm = () => {
     // 1.검증 2.서버연동 3.상태값변경해야함
 
     createBookData({
-      publisher: publisherRef.current.value,
+      publisher: profiledata.publisherName,
       title: titleRef.current.value,
       author: authorRef.current.value,
       pubDate: pubDateRef.current.value,
       categoryName: categoryName,
       priceStandard: priceStandardRef.current.value,
+      quantity: quantityRef.current.value,
       isbn: isbnRef.current.value,
-      quantity: quantityRef.current.value
+  
     });
     // navigate("/");
   }
@@ -108,7 +115,7 @@ const BookForm = () => {
     <StyledBookForm>
     <div>
       <h3>신간도서등록</h3>
-      <form action="">
+      <form onSubmit={handleBook} ref={formRef}>
       <label>
         <span>출판사</span>
         {!profiledata? (
@@ -147,9 +154,10 @@ const BookForm = () => {
       <label><span>정가</span><input type="text" ref={priceStandardRef}/></label>
       <label><span>수량</span><input type="text" ref={quantityRef}/></label>   
       <label><span>isbn번호</span><input type="text" ref={isbnRef}/></label>
-      <label><span>이미지</span><input type="file" /></label>
+      <label><span>이미지</span><input type="file" multiple accept="image/*, video/*" ref={fileRef} /></label>
+      <button type="submit">등록</button>
       </form>
-      <button onClick={handleSave}>등록</button>
+      
     </div>
     </StyledBookForm>
   )

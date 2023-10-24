@@ -1,15 +1,32 @@
 import LineChart from "@/components/Chart/LineChart";
 import PieChart from "@/components/Chart/PieChart";
 import { StyledChart } from "@/components/Chart/styles";
+import { ProfileData } from "@/modules/book/profiledata";
 import { getCookie } from "@/utils/cookie";
+import http from "@/utils/http";
+import { useEffect, useState } from "react";
 
 const Home = () => {
 
   const token = getCookie("token");
-  console.log(token);
   if (!token) {
     window.location.href = "http://localhost:5000/login";
   } 
+
+  const[ profiledata, setProfileData] = useState<ProfileData>();
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await http.get<ProfileData>("http://localhost:8080/profile")
+        console.log(response.data);
+        setProfileData(response.data);
+      } catch (e: any) {
+        console.log("에러");
+        console.log(e);       
+      }
+    })();
+  }, [])
+
   
   const pieData = 
   [
@@ -198,7 +215,18 @@ const Home = () => {
   <StyledChart>
   <div id="container">   
     <div id="box">
-      <div id="div">여기에 ㅇㅇ출판사님 어쩌구 넣기</div>
+      {!profiledata? (
+          <p>로딩중</p>
+        ) : (
+          <div id="div">
+            <div>
+              <p>{profiledata.publisherName}</p>
+              <p>이미지넣기</p>
+            </div>
+            <p>통계넣기</p>         
+          </div>
+        )      
+      }
       <div id="lineChart">
         <LineChart data={lineData} />
       </div>

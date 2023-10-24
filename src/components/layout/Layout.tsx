@@ -1,26 +1,55 @@
-import { Suspense } from "react";
+import { Suspense, useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { StyledLayout } from "./styles";
 import { Sidebar } from "../sidebar";
+import { ProfileData } from "@/modules/book/profiledata";
+import http from "@/utils/http";
 
 function Layout() {
 
   const handleLogout = () => {
     const ask = confirm("로그아웃 하시겠습니까?");
-
     if(ask) {
       document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";        
       window.location.replace("/login");
     }
   };
 
+  const[ profiledata, setProfileData] = useState<ProfileData>();
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await http.get<ProfileData>("http://localhost:8080/profile")
+        console.log(response.data);
+        setProfileData(response.data);
+      } catch (e: any) {
+        console.log("에러");
+        console.log(e);       
+      }
+    })();
+  }, [])
+
+
+
+
+
+
+
+
   return (
     <StyledLayout>
     <div id="container">
       <header>
-        <p>ㅇㅇㅇ출판사</p>
+      {!profiledata? (
+          <p>로딩중</p>
+        ) : (
+          <p>{profiledata.publisherName}님, 환영합니다!</p>
+        )      
+      }
+      <div id="navi">
         <button onClick={handleLogout}>로그아웃</button>
         <a href="">도서몰바로가기</a>
+      </div>
       </header>
       <div id="box">
         <Sidebar />

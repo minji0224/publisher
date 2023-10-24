@@ -15,9 +15,15 @@ interface BookData {
   author: string;
   pubDate: string;
   priceStandard: string;
-  isbn: string;
   quantity: string;
-  // createdDate?: string;
+  isbn: string;
+  file?: BookFile;
+}
+
+interface BookFile {
+  contentType: string;
+  originalFileName: string;
+  uuidFileName: string;
 }
 
 /*
