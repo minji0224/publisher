@@ -7,7 +7,7 @@ const BOOK_DATA_KEY = "/books";
 // Axios인스턴스 생성(백엔드 API와 통신)
 const bookApi = axios.create({ baseURL: "http://localhost:8080" });
 
-interface BookData {
+export interface BookData {
   id?: number;
   publisher: string;
   categoryName: string;
@@ -20,7 +20,7 @@ interface BookData {
   file?: BookFile;
 }
 
-interface BookFile {
+export interface BookFile {
   contentType: string;
   originalFileName: string;
   uuidFileName: string;

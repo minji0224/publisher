@@ -68,7 +68,15 @@ export const StyledBookForm = styled.div`
     text-align: left;
   } */
 
-  /* button {
- 
-  } */
+  button {
+    padding: 8px 16px;
+    cursor: pointer;
+    background-color: #e4e4e4;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 14px;
+    line-height: 1;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    margin: 5px;
+    border-radius: 10px;
+  }
 `;

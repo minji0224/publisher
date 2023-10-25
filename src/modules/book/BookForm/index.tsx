@@ -73,8 +73,7 @@ const BookForm = () => {
     (async()=> {
       const response = await http.post<BookData>("books/with-file", formData);
       console.log(response);
-      console.log();
-      
+
 
       if(response.status === 201) {
         console.log("201");

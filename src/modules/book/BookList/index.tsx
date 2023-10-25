@@ -15,7 +15,39 @@ const BookList = () => {
   return (
     <StyledBookList>
     <div>
-      <div>재고 날짜/이름별 조회 넣기</div>   
+      <h3>도서재고조회</h3>
+      <form action="">
+        <div className="radiobox">
+          <span>상품등록일</span>
+          <input type="radio" name="radio" id="radio-today" />
+          <label htmlFor="radio-today">오늘</label>
+          <input type="radio" name="radio" id="radio-1month" />
+          <label htmlFor="radio-1month">1개월</label>
+          <input type="radio" name="radio" id="radio-6month" />
+          <label htmlFor="radio-6month">6개월</label>
+          <input type="radio" name="radio" id="radio-all" />
+          <label htmlFor="radio-all">전체</label>
+        </div>
+
+        <label className="querybox">
+          <span>검색분류</span>
+          <select name="" id="">
+            <option value="">도서명</option>
+            <option value="">저자</option>
+            <option value="">isbn번호</option>
+          </select>
+          <input type="text" />
+          <button>검색</button>
+          <button>초기화</button>
+        </label>
+
+
+
+
+
+
+
+      </form>
        {isValidating ? ( <div>로딩중</div>) : (
       <table>
       <thead>
@@ -48,10 +80,10 @@ const BookList = () => {
       </tbody>
     </table>
     )}
-    <div>
-      <button>이전</button>
-      <button>다음</button>
-    </div>
+      <div id="pageBtn">
+        <button>이전</button>
+        <button>다음</button>
+      </div>
     </div>
     </StyledBookList>
   )
