@@ -26,6 +26,14 @@ export interface BookFile {
   uuidFileName: string;
 }
 
+export interface SearchRequset {
+  keyword: string;
+  option: string;
+  date: string;
+  page: number;
+  size: number;
+}
+
 /*
   - 백엔드 데이터 가져오는 함수
   const fetcher = async (url) => {

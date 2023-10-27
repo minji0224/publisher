@@ -9,11 +9,6 @@ import http from "@/utils/http";
 
 const BookForm = () => {
 
-  const [categoryName, setCategoryName] = useState("사전");
-  const handleCategoryNameValue = (e) => {
-    setCategoryName(e.target.value);   
-  };
-
   const navigate = useNavigate();
 
   const titleRef = useRef() as MutableRefObject<HTMLInputElement>;
@@ -24,14 +19,17 @@ const BookForm = () => {
   const fileRef = useRef() as MutableRefObject<HTMLInputElement>;
   const pubDateRef = useRef() as MutableRefObject<HTMLInputElement>;
   const formRef = useRef<HTMLFormElement>();
+  const [categoryName, setCategoryName] = useState("사전");
+  const handleCategoryNameValue = (e) => {
+    setCategoryName(e.target.value);   
+  };
   
-
-  const { data, createBookData, isValidating } = useBooksData();
   const[ profiledata, setProfileData] = useState<ProfileData>();
   const [books, setBooks] = useState<BookData[]>([]);
 
 
   // 쿠키검증 http로 바꾸기
+  // 해당 출판사(프로필) 가져오는 함수
   useEffect(() => {
     (async () => {
       try{
@@ -82,33 +80,11 @@ const BookForm = () => {
         setBooks([{...response.data}, ...books]);
         console.log(books);
         
-        navigate("/")
-
-        
+        navigate("/")        
       }
-      
     })();
   }
 
-
-  const handleSave = () => {
-
-    
-    // 1.검증 2.서버연동 3.상태값변경해야함
-
-    createBookData({
-      publisher: profiledata.publisherName,
-      title: titleRef.current.value,
-      author: authorRef.current.value,
-      pubDate: pubDateRef.current.value,
-      categoryName: categoryName,
-      priceStandard: priceStandardRef.current.value,
-      quantity: quantityRef.current.value,
-      isbn: isbnRef.current.value,
-  
-    });
-    // navigate("/");
-  }
 
   return (
     <StyledBookForm>

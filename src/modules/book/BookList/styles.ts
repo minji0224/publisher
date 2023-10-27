@@ -54,13 +54,20 @@ export const StyledBookList = styled.div`
   .querybox button {
     padding: 8px 16px;
     cursor: pointer;
-    background-color: #e4e4a4;
+    background-color: #e4e4e4;
     color: rgba(0, 0, 0, 0.6);
     font-size: 14px;
     line-height: 1;
     border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3),
+      0 1px rgba(255, 255, 255, 0.1);
     margin: 5px;
     width: 80px;
+  }
+
+  .querybox button:hover {
+    box-shadow: none;
+    border: 1px #fff;
   }
 
   .radiobox {
@@ -79,6 +86,7 @@ export const StyledBookList = styled.div`
   }
 
   .radiobox label {
+    text-align: center;
     padding: 8px 16px;
     cursor: pointer;
     background-color: #e4e4e4;
@@ -88,10 +96,16 @@ export const StyledBookList = styled.div`
     border: 1px solid rgba(0, 0, 0, 0.2);
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3),
       0 1px rgba(255, 255, 255, 0.1);
+    width: 37px;
+  }
+
+  .radiobox label:hover {
+    box-shadow: none;
+    border: 1px #fff;
   }
 
   .radiobox input:checked + label {
-    background-color: #a5ad16;
+    background-color: #8fc866;
     box-shadow: none;
   }
 
@@ -140,6 +154,13 @@ export const StyledBookList = styled.div`
     font-size: 14px;
     line-height: 1;
     border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3),
+      0 1px rgba(255, 255, 255, 0.1);
     margin: 5px;
+  }
+
+  #pageBtn button:hover {
+    box-shadow: none;
+    border: 1px #fff;
   }
 `;
