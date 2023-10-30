@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useRevalidator } from "react-router-dom";
 import { BookData, SearchRequset, useBooksData, } from "../bookdata"
 import { StyledBookList } from "./styles";
 import { MutableRefObject, useEffect, useRef, useState } from "react";
@@ -6,32 +6,45 @@ import http from "@/utils/http";
 
 const BookList = () => {
 
-  const {data, isValidating} = useBooksData();
-  const [searchBooks, setSearchBooks] = useState<BookData[]>([]);
-  console.log(`기존데이터 불러오고 있는지 ${isValidating}`);
-  console.log("---기존데이터");
-  console.log(data);
-  console.log("---검색데이터"); 
-  console.log(searchBooks);
-
-  const size = 10;
+  const PAGE_SIZE = 10;
   const [currentPage, setcurrentPage] = useState(0);
   const [pageBtnLeft, setPageBtnLeft] = useState(false);
   const [pageBtnRight, setPageBtnRight] = useState(true);
   const [totalPage, setTotalPage] = useState(0);
+  console.log(`현재페이지: ${currentPage}`);
+  console.log(`왼쪽페이지버튼: ${pageBtnLeft}`);
+  console.log(`오른쪽페이지버튼: ${pageBtnRight}`);
+  console.log(`받아온데이터의토탈페이지: ${totalPage}`);
+  
+  const {data, isValidating} = useBooksData(currentPage, PAGE_SIZE);
+  const [searchBooks, setSearchBooks] = useState<BookData[]>([]);
+  console.log(`기존데이터 불러오고 있는지 ${isValidating}`);
+  console.log("---기존데이터");
+  console.log(data);
+  console.log(data.content);
+  console.log("---검색데이터"); 
+  console.log(searchBooks);
+
+  // 패처로 받아온 데이터로 토탈페이지 상태값 넣기.
+  useEffect(()=> {
+    if(data) {
+      setTotalPage(data.totalPages)
+    }
+  }, [data])
+
+
 
 
   // 페이징버튼 상태값
   useEffect(()=> {
-    console.log(currentPage);
     
     if(currentPage > 0) {
-      setPageBtnLeft(true);
-    } else if (currentPage === 0 ) {
+      setPageBtnLeft(true);     
+    } else if (currentPage === 0 ) {      
       setPageBtnLeft(false);
     }
     if ( currentPage >= totalPage -1) {
-      setPageBtnRight(false);
+      setPageBtnRight(false);    
     } else {
       setPageBtnRight(true);
     }
@@ -41,7 +54,7 @@ const BookList = () => {
   // 검색창 내부 상태관리
   const keywordRef = useRef() as MutableRefObject<HTMLInputElement>;
 
-  const [option, setOption] = useState();
+  const [option, setOption] = useState("title");
   const handleOptionValue = (e) => {
     setOption(e.target.value);
   }
@@ -53,6 +66,7 @@ const BookList = () => {
   console.log(`검색옵션값: ${option}`);
   console.log(`검색날짜값: ${date}`);
   
+  // 검색하는 함수
   const handleSearch = ()=> {
 
     const searchRequest: SearchRequset = {
@@ -60,15 +74,17 @@ const BookList = () => {
       option: option,
       date: date,
       page: currentPage,
-      size: size
+      size: PAGE_SIZE
     };
 
     (async()=> {
 
-
       try{
         const response = await http.post("books/paging/search", searchRequest)
         console.log(response.data);
+        if(response.data.content.length === 0){
+          alert("검색결과가 없습니다.")
+        }
 
         // 서버에서 페이지객체로 리스폰 받았기때문에 필요한 북데이터를 형식에 맞게 넣어주기
         const searchBookDataResponse  = response.data.content.map( i => ({
@@ -84,7 +100,7 @@ const BookList = () => {
         }));
 
         setSearchBooks([...searchBookDataResponse]);
-        setTotalPage(response.data.sort.totalPages);     
+        setTotalPage(response.data.totalPages);     
         
       } catch(e:any) {
         console.log("검색에러");       
@@ -143,7 +159,7 @@ const BookList = () => {
         </tr>
       </thead>
       <tbody>
-      {/* {searchBooks.length > 0 ? (
+      {searchBooks.length > 0 ? (
                 searchBooks.map((book, index) => (
                   <tr key={book.id}>
                     <td>{index + 1}</td>
@@ -155,8 +171,8 @@ const BookList = () => {
                   </tr>
                 ))
               ) : (
-                data.length > 0 ? (
-                  data.map((book, index) => (
+                data.content.length > 0 ? (
+                  data.content.map((book, index) => (
                     <tr key={book.id}>
                       <td>{index + 1}</td>
                       <td>{book.title}</td>
@@ -171,29 +187,13 @@ const BookList = () => {
                     <td>등록된 재고가 없습니다.</td>
                   </tr>
                 )
-              )} */}
-        {data.length > 0 ? (
-          data.map((c, inx) => (
-            <tr key={c.id}>
-              <td><p>{inx + 1}</p></td>
-              <td><p>{c.title}</p></td>
-              <td><p>{c.author}</p></td>
-              <td><p>{c.pubDate}</p></td>
-              <td><p>{c.quantity}</p></td>
-              <td><p>{c.isbn}</p></td>
-            </tr>
-          ))
-        ) : (
-          <tr>
-            <td>등록된 재고가 없습니다.</td>
-          </tr>
-        )}
+              )}
       </tbody>
     </table>
     )}
       <div id="pageBtn">
-        <button onClick={()=>{setcurrentPage(currentPage -1 )}}>이전</button>
-        <button onClick={()=>{setcurrentPage(currentPage +1 )}}>다음</button>
+        <button onClick={()=>{setcurrentPage(currentPage -1 )}} disabled={!pageBtnLeft}>이전</button>
+        <button onClick={()=>{setcurrentPage(currentPage +1 )}} disabled={!pageBtnRight}>다음</button>
       </div>
     </div>
     </StyledBookList>

@@ -23,6 +23,7 @@ export const StyledBookList = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 100%;
   }
 
   .querybox {
@@ -117,13 +118,14 @@ export const StyledBookList = styled.div`
     border-radius: 10px;
   }
 
-  th {
-    border-bottom: 1px solid #e0e0e0;
-  }
-
   tr {
     display: table-row;
     vertical-align: inherit;
+    height: 50px;
+  }
+
+  th {
+    border-bottom: 1px solid #e0e0e0;
   }
 
   tr:hover td {

@@ -7,7 +7,7 @@ const BOOK_DATA_KEY = "/books";
 const bookApi = axios.create({ baseURL: "http://localhost:8080" });
 
 export interface BookData {
-  id?: number;
+  id: number;
   publisher: string;
   categoryName: string;
   title: string;
@@ -42,12 +42,12 @@ export interface SearchRequset {
     -> 여기 url매개변수는 useSWR의 첫번째 인자에서 받음
     -> awios는 .data에 get으로 가져온 데이터가 들어감.
 */
-const booksFetcher = async ([key]) => {
+const booksFetcher = async ([key, page, size]) => {
   console.log("책조회(get)");
   try {
     const token = getCookie("token");
-    const response = await bookApi.get<BookData[]>(
-      `${key}?_sort=id?_sort=id&_order=desc`,
+    const response = await bookApi.get(
+      `${key}/paging?page=${page}&size=${size}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -61,9 +61,9 @@ const booksFetcher = async ([key]) => {
   }
 };
 
-export const useBooksData = () => {
-  const { data, mutate, isValidating } = useSWR<BookData[]>(
-    [BOOK_DATA_KEY],
+export const useBooksData = (page?: number, size?: number) => {
+  const { data, mutate, isValidating } = useSWR(
+    [BOOK_DATA_KEY, page, size],
     booksFetcher,
     {
       fallbackData: INIT_DATA,
