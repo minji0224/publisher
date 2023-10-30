@@ -7,8 +7,12 @@ import http from "@/utils/http";
 const BookList = () => {
 
   const {data, isValidating} = useBooksData();
-  console.log(`데이터 불러오고 있는지 ${isValidating}`);
+  const [searchBooks, setSearchBooks] = useState<BookData[]>([]);
+  console.log(`기존데이터 불러오고 있는지 ${isValidating}`);
+  console.log("---기존데이터");
   console.log(data);
+  console.log("---검색데이터"); 
+  console.log(searchBooks);
 
   const size = 10;
   const [currentPage, setcurrentPage] = useState(0);
@@ -34,6 +38,7 @@ const BookList = () => {
   }, [currentPage, totalPage]);
 
 
+  // 검색창 내부 상태관리
   const keywordRef = useRef() as MutableRefObject<HTMLInputElement>;
 
   const [option, setOption] = useState();
@@ -45,33 +50,46 @@ const BookList = () => {
     setDate(e.target.value);
   }
 
-  console.log(option);
-  console.log(date);
+  console.log(`검색옵션값: ${option}`);
+  console.log(`검색날짜값: ${date}`);
   
   const handleSearch = ()=> {
 
-    // const searchRequest: SearchRequset = {
-    //   keyword: keywordRef.current.value,
-    //   option: option,
-    //   date: date,
-    //   page: currentPage,
-    //   size: size
-    // };
+    const searchRequest: SearchRequset = {
+      keyword: keywordRef.current.value,
+      option: option,
+      date: date,
+      page: currentPage,
+      size: size
+    };
 
-    // (async()=> {
-
-    //   const response = await http.post<BookData>("books/paging/search", searchRequest)
-    //   console.log(response);
-
-    //   if(response.status === 200) {
-    //     const searchData =  response.data;
-    //     setData[]
-    //   }
+    (async()=> {
 
 
+      try{
+        const response = await http.post("books/paging/search", searchRequest)
+        console.log(response.data);
 
-    // })()
+        // 서버에서 페이지객체로 리스폰 받았기때문에 필요한 북데이터를 형식에 맞게 넣어주기
+        const searchBookDataResponse  = response.data.content.map( i => ({
+          id: i.id,
+          publisher: i.publisher,
+          categoryName: i.categoryName,
+          title: i.title,
+          author: i.author,
+          pubDate: i.pubDate,
+          priceStandard: i.priceStandard,
+          quantity: i.quantity,
+          isbn: i.isbn,
+        }));
 
+        setSearchBooks([...searchBookDataResponse]);
+        setTotalPage(response.data.sort.totalPages);     
+        
+      } catch(e:any) {
+        console.log("검색에러");       
+      }
+    })()
   };
   
   
@@ -125,13 +143,42 @@ const BookList = () => {
         </tr>
       </thead>
       <tbody>
+      {/* {searchBooks.length > 0 ? (
+                searchBooks.map((book, index) => (
+                  <tr key={book.id}>
+                    <td>{index + 1}</td>
+                    <td>{book.title}</td>
+                    <td>{book.author}</td>
+                    <td>{book.pubDate}</td>
+                    <td>{book.quantity}</td>
+                    <td>{book.isbn}</td>
+                  </tr>
+                ))
+              ) : (
+                data.length > 0 ? (
+                  data.map((book, index) => (
+                    <tr key={book.id}>
+                      <td>{index + 1}</td>
+                      <td>{book.title}</td>
+                      <td>{book.author}</td>
+                      <td>{book.pubDate}</td>
+                      <td>{book.quantity}</td>
+                      <td>{book.isbn}</td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td>등록된 재고가 없습니다.</td>
+                  </tr>
+                )
+              )} */}
         {data.length > 0 ? (
           data.map((c, inx) => (
             <tr key={c.id}>
               <td><p>{inx + 1}</p></td>
               <td><p>{c.title}</p></td>
               <td><p>{c.author}</p></td>
-              <td><p>출간일</p></td>
+              <td><p>{c.pubDate}</p></td>
               <td><p>{c.quantity}</p></td>
               <td><p>{c.isbn}</p></td>
             </tr>

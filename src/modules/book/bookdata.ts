@@ -4,7 +4,6 @@ import useSWR, { mutate } from "swr";
 
 const INIT_DATA: BookData[] = [];
 const BOOK_DATA_KEY = "/books";
-// Axios인스턴스 생성(백엔드 API와 통신)
 const bookApi = axios.create({ baseURL: "http://localhost:8080" });
 
 export interface BookData {
@@ -72,28 +71,28 @@ export const useBooksData = () => {
     }
   );
 
-  function createBookData(newBook: BookData) {
-    mutate(async (prevData: BookData[] = [...INIT_DATA]) => {
-      console.log("---mutate이전데이터");
+  // function createBookData(newBook: BookData) {
+  //   mutate(async (prevData: BookData[] = [...INIT_DATA]) => {
+  //     console.log("---mutate이전데이터");
 
-      console.log(prevData);
+  //     console.log(prevData);
 
-      let nextData = [...prevData];
+  //     let nextData = [...prevData];
 
-      try {
-        const response = await bookApi.post(BOOK_DATA_KEY, newBook);
-        console.log(response.data);
+  //     try {
+  //       const response = await bookApi.post(BOOK_DATA_KEY, newBook);
+  //       console.log(response.data);
 
-        if (response.status === 201) {
-          nextData.unshift({ ...response.data });
-          console.log(201);
-        }
-      } catch (e: any) {
-        console.log(`에러: ${e}`);
-      }
-      return nextData;
-    }, false);
-  }
+  //       if (response.status === 201) {
+  //         nextData.unshift({ ...response.data });
+  //         console.log(201);
+  //       }
+  //     } catch (e: any) {
+  //       console.log(`에러: ${e}`);
+  //     }
+  //     return nextData;
+  //   }, false);
+  // }
 
-  return { data, createBookData, isValidating };
+  return { data, isValidating };
 };
