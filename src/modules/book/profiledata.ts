@@ -1,10 +1,5 @@
-import { getCookie } from "@/utils/cookie";
-import axios from "axios";
-import useSWR from "swr";
-
-const INIT_DATA: ProfileData[] = [];
-const PROFILE_DATA_KEY = "/profile";
-const porfileApi = axios.create({ baseURL: "http://localhost:8080/" });
+import http from "@/utils/http";
+import { useEffect, useState } from "react";
 
 export interface ProfileData {
   id?: number;
@@ -13,29 +8,22 @@ export interface ProfileData {
   businessRegistrationNumber: string;
 }
 
-// const profileFetcher = async ([key]) => {
-//   console.log("프로필조회(get)");
-//   try {
-//     const token = getCookie("token");
-//     const response = await porfileApi.get<ProfileData[]>(key, {
-//       headers: {
-//         Authorization: `Bearer ${token}`,
-//       },
-//     });
-//     return response.data;
-//   } catch (e: any) {
-//     console.log("프로필패처에러");
-//     return INIT_DATA;
-//   }
-// };
+export function useProfileData() {
+  const [profiledata, setProfileData] = useState<ProfileData>();
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await http.get<ProfileData>(
+          "http://localhost:8080/profile"
+        );
+        console.log(response.data);
+        setProfileData(response.data);
+      } catch (e: any) {
+        console.log("에러");
+        console.log(e);
+      }
+    })();
+  }, []);
 
-// export const useProfileData = () => {
-//   const { data: profileData, isValidating: isProfileValidating } = useSWR<
-//     ProfileData[]
-//   >([PROFILE_DATA_KEY], profileFetcher, {
-//     fallbackData: INIT_DATA,
-//     revalidateOnFocus: false,
-//   });
-
-//   return { profileData, isProfileValidating };
-// };
+  return profiledata;
+}

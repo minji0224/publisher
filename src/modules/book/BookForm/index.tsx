@@ -3,7 +3,7 @@ import { StyledBookForm, } from "./styles";
 import { Outlet, useNavigate } from "react-router-dom";
 import { BookData, useBooksData } from "../bookdata";
 import axios from "axios";
-import{ProfileData} from "../profiledata"
+import{ProfileData, useProfileData} from "../profiledata"
 import { getCookie } from "@/utils/cookie";
 import http from "@/utils/http";
 
@@ -24,30 +24,12 @@ const BookForm = () => {
     setCategoryName(e.target.value);   
   };
   
-  const[ profiledata, setProfileData] = useState<ProfileData>();
   const [books, setBooks] = useState<BookData[]>([]);
 
+  const profileData = useProfileData();
 
-  // 쿠키검증 http로 바꾸기
-  // 해당 출판사(프로필) 가져오는 함수
-  useEffect(() => {
-    (async () => {
-      try{
-        const token = getCookie("token");
-        const response = await axios.get<ProfileData>("http://localhost:8080/profile",{
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        if (response.status === 200) {      
-          setProfileData(response.data);         
-        }
-      } catch (e:any) {
-        console.log(e);  
-        console.log("에러");            
-      }
-    })();
-  }, []);
+
+
 
 
   const handleBook = (e: React.FormEvent) => {
@@ -57,7 +39,7 @@ const BookForm = () => {
     formData.append("file", fileRef.current.files[0]);
 
     const createRequest = {
-      publisher: profiledata.publisherName,
+      publisher: profileData.publisherName,
       categoryName: categoryName,
       title: titleRef.current.value,
       author: authorRef.current.value,
@@ -93,10 +75,10 @@ const BookForm = () => {
       <form onSubmit={handleBook} ref={formRef}>
       <label>
         <span>출판사</span>
-        {!profiledata? (
+        {!profileData? (
           <p>로딩중</p>
         ) : (
-          <input type="text" value={profiledata.publisherName} readOnly />
+          <input type="text" value={profileData.publisherName} readOnly />
         )      
       }
       </label>

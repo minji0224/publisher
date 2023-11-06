@@ -2,7 +2,7 @@ import { Suspense, useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { StyledLayout } from "./styles";
 import { Sidebar } from "../sidebar";
-import { ProfileData } from "@/modules/book/profiledata";
+import { ProfileData, useProfileData } from "@/modules/book/profiledata";
 import http from "@/utils/http";
 
 function Layout() {
@@ -15,19 +15,8 @@ function Layout() {
     }
   };
 
-  const[ profiledata, setProfileData] = useState<ProfileData>();
-  useEffect(() => {
-    (async () => {
-      try {
-        const response = await http.get<ProfileData>("http://localhost:8080/profile")
-        console.log(response.data);
-        setProfileData(response.data);
-      } catch (e: any) {
-        console.log("에러");
-        console.log(e);       
-      }
-    })();
-  }, [])
+  const profileData = useProfileData();
+
 
 
 
@@ -40,10 +29,10 @@ function Layout() {
     <StyledLayout>
     <div id="container">
       <header>
-      {!profiledata? (
+      {!profileData? (
           <p>로딩중</p>
         ) : (
-          <p>{profiledata.publisherName}님, 환영합니다!</p>
+          <p>{profileData.publisherName}님, 환영합니다!</p>
         )      
       }
       <div id="navi">

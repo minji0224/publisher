@@ -16,6 +16,8 @@ export interface BookData {
   priceStandard: string;
   quantity: string;
   isbn: string;
+  createdDate?: string;
+  isActive?: boolean;
   file?: BookFile;
 }
 

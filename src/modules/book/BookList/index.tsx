@@ -97,6 +97,8 @@ const BookList = () => {
           priceStandard: i.priceStandard,
           quantity: i.quantity,
           isbn: i.isbn,
+          createdDate: i.createdDate,
+          isActive: i.isActive,
         }));
 
         setSearchBooks([...searchBookDataResponse]);
@@ -156,6 +158,8 @@ const BookList = () => {
           <th><p>출간일</p></th>
           <th><p>재고</p></th>
           <th><p>isbn번호</p></th>
+          <th><p>상품등록일</p></th>
+          <th><p>등록상태</p></th>
         </tr>
       </thead>
       <tbody>
@@ -168,6 +172,8 @@ const BookList = () => {
                     <td>{book.pubDate}</td>
                     <td>{book.quantity}</td>
                     <td>{book.isbn}</td>
+                    <td>{book.createdDate}</td>
+                    <td>{book.isActive ? "판매중": "등록완료"}</td>
                   </tr>
                 ))
               ) : (
@@ -180,6 +186,8 @@ const BookList = () => {
                       <td>{book.pubDate}</td>
                       <td>{book.quantity}</td>
                       <td>{book.isbn}</td>
+                      <td>{book.createdDate}</td>
+                      <td>{book.isActive ? "판매중": "등록완료"}</td>
                     </tr>
                   ))
                 ) : (

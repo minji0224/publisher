@@ -26,7 +26,7 @@ const LineChart = ({ data /* see data tab */ }) => (
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: '날짜',
+            legend: '',
             legendOffset: 36,
             legendPosition: 'middle'
         }}
@@ -34,7 +34,7 @@ const LineChart = ({ data /* see data tab */ }) => (
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: '판매금액',
+            legend: '',
             legendOffset: -40,
             legendPosition: 'middle'
         }}

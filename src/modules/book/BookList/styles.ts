@@ -29,6 +29,7 @@ export const StyledBookList = styled.div`
   .querybox {
     height: 50%;
     padding: 20px;
+    display: flex;
   }
 
   .querybox span {
