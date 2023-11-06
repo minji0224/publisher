@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyledSidebar } from "./styles";
+import { StyledSidebar } from "./styles copy";
 import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
 import { Link } from "react-router-dom";
 

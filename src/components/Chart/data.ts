@@ -5,6 +5,7 @@ export interface PieChartData {
   totalCount: number;
   title: string;
   author: string;
+  uuidFilename?: string;
 }
 
 export interface LineChartData {

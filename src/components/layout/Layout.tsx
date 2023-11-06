@@ -1,7 +1,7 @@
 import { Suspense, useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { StyledLayout } from "./styles";
-import { Sidebar } from "../sidebar";
+import { Sidebar } from "../sidebar/index copy";
 import { ProfileData, useProfileData } from "@/modules/book/profiledata";
 import http from "@/utils/http";
 

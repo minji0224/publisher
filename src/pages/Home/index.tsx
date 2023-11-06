@@ -14,10 +14,13 @@ const Home = () => {
   if (!token) {
     window.location.href = "http://localhost:5000/login";
   } 
+
+  // 프로필 정보 불러오기
   const profileData = useProfileData();
 
   // 파이차트 불러오기
   const[pieData, setPieData] = useState([]);
+  const[BookImg, setBookImg] = useState("");
   const pieChartColers = [
     "hsl(13, 70%, 50%)",
     "hsl(260, 70%, 50%)",
@@ -38,10 +41,16 @@ const Home = () => {
           value: item.totalCount,
           color: pieChartColers[inx],
         }));     
-
         console.log(result);
+
+        // 제일 많이 판매된 책의 uuid만 뽑기
+        const uuid = response.data.reduce((a,b) =>(a.totalCount > b.totalCount? a: b)).uuidFilename
         
         setPieData([...result]);
+        setBookImg(uuid);
+        console.log(uuid);
+        
+
         
       } catch (e: any) {
         console.log("파이차트에러");
@@ -79,7 +88,7 @@ const Home = () => {
     })();
   }, []);
 
-  
+
 
   return (
   <StyledChart>
@@ -106,9 +115,6 @@ const Home = () => {
     </div>
   </div>
   </StyledChart>
-    
-
-
   )
 };
 
