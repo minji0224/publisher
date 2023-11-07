@@ -1,10 +1,10 @@
 import { Suspense, useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { StyledLayout } from "./styles";
-import { Sidebar } from "../sidebar/index copy";
+import { Sidebar } from "../sidebar/index";
 import { ProfileData, useProfileData } from "@/modules/book/profiledata";
 import http from "@/utils/http";
-
+import { AiOutlineUnlock } from "react-icons/ai";
 function Layout() {
 
   const handleLogout = () => {
@@ -19,35 +19,58 @@ function Layout() {
 
 
   return (
+
     <StyledLayout>
-    <div id="container">
+    <div id="layout">
+      <Sidebar />
       <div id="header">
-
-
-        
-      </div>
-      <header>
-      {!profileData? (
-          <p>로딩중</p>
-        ) : (
-          <p>{profileData.publisherName}님, 환영합니다!</p>
-        )      
-      }
-      <div id="navi">
-        <button onClick={handleLogout}>로그아웃</button>
-        <a href="">도서몰바로가기</a>
-      </div>
-      </header>
-      <div id="box">
-        <Sidebar />
-        <main>
-          <Suspense fallback={<div>...Suspense 로딩 중...</div>}>
-            <Outlet />
-          </Suspense>
-        </main>
+        <header>
+        {!profileData? (
+            <p>로딩중</p>
+          ) : (
+            <p>{profileData.publisherName}님, 환영합니다!</p>
+          )      
+        }
+          <button id="logoutBtn"onClick={handleLogout}><AiOutlineUnlock/></button>
+        </header>
+        <div id="main">
+          <main>
+            <Suspense fallback={<div>...Suspense 로딩 중...</div>}>
+              <Outlet />
+            </Suspense>
+          </main>
+        </div>
       </div>
     </div>
     </StyledLayout>
+
+
+
+
+    // <StyledLayout>
+    // <div id="container">
+    //   <header>
+    //   {!profileData? (
+    //       <p>로딩중</p>
+    //     ) : (
+    //       <p>{profileData.publisherName}님, 환영합니다!</p>
+    //     )      
+    //   }
+    //   <div id="navi">
+    //     <button onClick={handleLogout}>로그아웃</button>
+    //     <a href="">도서몰바로가기</a>
+    //   </div>
+    //   </header>
+    //   <div id="box">
+    //     <Sidebar />
+    //     <main>
+    //       <Suspense fallback={<div>...Suspense 로딩 중...</div>}>
+    //         <Outlet />
+    //       </Suspense>
+    //     </main>
+    //   </div>
+    // </div>
+    // </StyledLayout>
   )
 
 }

@@ -1,27 +1,36 @@
 import styled from "@emotion/styled";
 
 export const StyledLayout = styled.div`
-  #container {
+  #layout {
     box-sizing: border-box;
+    width: 100%;
+    display: flex;
+  }
+
+  #header {
+    display: flex;
+    flex-direction: column;
     width: 100%;
   }
 
-  header {
-    height: 3rem;
+  #header header {
+    height: 4rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 0px 20px 0px 20px;
     padding-top: 0;
-    background-color: #e0e0e0;
   }
 
-  #box {
-    display: flex;
-    height: 100vh;
+  #logoutBtn {
+    all: initial;
+    width: 30px;
+    height: 30px;
   }
 
-  main {
+  #logoutBtn svg {
     width: 100%;
+    height: 100%;
+    stroke-width: 15px;
   }
 `;

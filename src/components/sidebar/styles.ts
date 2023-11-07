@@ -1,82 +1,55 @@
 import styled from "@emotion/styled";
 
 export const StyledSidebar = styled.div`
-  div {
-    box-sizing: border-box;
-    width: 14rem;
-    height: 100vh;
-    border-right: 1px solid rgba(0, 0, 0, 0.07);
-    box-shadow: 0 0px 24px 0 rgb(0 0 0 / 6%), 0 1px 0px 0 rgb(0 0 0 / 2%);
-    padding: 20px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  /* 
-  ul:first-of-type:hover {
-    background-color: #e0e0e0;
-
-  } */
-
-  div > ul {
-    cursor: pointer;
-    min-height: 2.3rem; // 고정 높이 대신 최소 높이 사용
-    margin: 0;
-    list-style: none;
-    transition: min-height 0.3s;
-    padding: 0;
-    width: 100%;
-  }
-
-  div > ul > li:hover {
-    background-color: #e0e0e0;
-    border-radius: 10px;
-  }
-
-  div > ul > li:first-of-type {
-    background-color: #e0e0e0;
-    border-radius: 10px;
-  }
-
-  p {
-    display: inline-block;
-    margin: 0;
-    text-align: center;
-    align-items: center;
+  #sidebar {
+    width: 200px;
     height: 100%;
-  }
-
-  svg {
-    font-size: 20px;
-  }
-
-  div > ul > li {
-    height: 2.3rem;
-    border-bottom: 1px solid #e0e0e0;
-  }
-
-  div > ul > ul {
-    padding: 0;
-  }
-
-  div > ul > ul > li {
-    text-align: center;
-    list-style: none;
-    height: 2.3rem;
-    margin-top: 10px;
-  }
-
-  div > ul > ul > li:hover {
-    background-color: #e0e0e0;
+    background: #f3f6fd;
     border-radius: 10px;
+    padding: 16px;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+  }
+
+  header {
+    border: 1px solid black;
+    margin: 0;
+    padding: 0;
+    padding: 15px;
+    line-height: 52px;
+    background-color: #fff;
+  }
+  header span {
+    border: 1px solid black;
+    display: inline-block;
+    display: block;
+  }
+  svg {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+    stroke-width: 15px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
   }
 
   a {
-    width: 100%;
-    height: 100%;
-    color: inherit;
     text-decoration: none;
-    display: inline-block;
+    padding: 15px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: black;
+  }
+
+  a:hover {
+    color: gray;
   }
 `;
