@@ -18,16 +18,14 @@ function Layout() {
   const profileData = useProfileData();
 
 
-
-
-
-
-
-
-
   return (
     <StyledLayout>
     <div id="container">
+      <div id="header">
+
+
+        
+      </div>
       <header>
       {!profileData? (
           <p>로딩중</p>
