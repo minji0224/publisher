@@ -53,7 +53,6 @@ export const StyledSidebar = styled.div`
     align-items: center;
     cursor: pointer;
     color: #848697;
-    font-family: "DM Sans";
     font-weight: 600;
     letter-spacing: 1px;
     font-size: 20px;
@@ -63,5 +62,14 @@ export const StyledSidebar = styled.div`
     color: black;
     background: rgb(230, 230, 230);
     color: #7380ec;
+  }
+
+  #profile img {
+    margin-top: 20px;
+  }
+
+  #profile span {
+    height: 30px;
+    padding: 0;
   }
 `;

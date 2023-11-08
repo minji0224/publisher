@@ -6,6 +6,10 @@ import { ProfileData, useProfileData } from "@/modules/book/profiledata";
 import { getCookie } from "@/utils/cookie";
 import http from "@/utils/http";
 import { useEffect, useState } from "react";
+import { StyledTitle } from "./styles";
+import { useBooksData } from "@/modules/book/bookdata";
+
+
 
 const Home = () => {
 
@@ -20,7 +24,8 @@ const Home = () => {
 
   // 파이차트 불러오기
   const[pieData, setPieData] = useState([]);
-  const[BookImg, setBookImg] = useState("");
+  const[topBook, setTopBook] = useState({title: "", author: "", uuid: ""});
+  const[totalData, setTotalData] = useState({totalCount: 0, totalPrice: 0});
   const pieChartColers = [
     "hsl(13, 70%, 50%)",
     "hsl(260, 70%, 50%)",
@@ -32,7 +37,9 @@ const Home = () => {
 
     (async()=> {
       try {
-        const response = await http.get<PieChartData[]>("http://localhost:8080/test/pieChart")
+        const response = await http.get<PieChartData[]>("http://localhost:8080/chart/pieChart")
+        console.log("파이차트");
+        
         console.log(response.data);
 
         const result = response.data.map((item, inx) =>({
@@ -43,12 +50,25 @@ const Home = () => {
         }));     
         console.log(result);
 
-        // 제일 많이 판매된 책의 uuid만 뽑기
-        const uuid = response.data.reduce((a,b) =>(a.totalCount > b.totalCount? a: b)).uuidFilename
+        // 제일 많이 판매된 책
+        const bestBook = response.data.reduce((a,b) =>(a.totalCount > b.totalCount? a: b))
         
         setPieData([...result]);
-        setBookImg(uuid);
-        console.log(uuid);
+        setTopBook({
+          title: bestBook.title,
+          author: bestBook.author,
+          uuid: bestBook.uuidFilename
+        })
+
+        const totalCountSum = response.data.reduce((a,b) => a + b.totalCount, 0)
+        const totalPriceSum = response.data.reduce((a,b)=> a + (b.priceSales * b.totalCount), 0)
+
+        setTotalData({
+          totalCount: totalCountSum,
+          totalPrice: totalPriceSum
+        })
+        
+
         
 
         
@@ -65,7 +85,7 @@ const Home = () => {
     (async()=> {
       try{
 
-        const response = await http.get<LineChartData[]>("http://localhost:8080/test/lineChart")
+        const response = await http.get<LineChartData[]>("http://localhost:8080/chart/lineChart")
         console.log(response.data);
 
         const result = [
@@ -88,30 +108,68 @@ const Home = () => {
     })();
   }, []);
 
+  // 토탈 숫자에 , 붙이기
+  function commas(num) {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
 
 
   return (
   <StyledChart>
+
   <div id="container">   
+    <h3>Best Seller</h3>
     <div id="box">
-      {!profileData? (
-          <p>로딩중</p>
-        ) : (
-          <div id="div">
-            <div>
-              <p>{profileData.publisherName}</p>
-              <p>이미지넣기</p>
+      <div id="box-2">
+        {!topBook? (
+            <p>로딩중</p>
+          ) : (
+            <StyledTitle>             
+            <div id="title">
+              <div className="total imgDiv">
+                  <img 
+                    src={`http://localhost:8080/books/file/c238ead2-8d9a-43ac-a931-bdd192403e78.jpg`} /> 
+              </div>
+              <div className="total total-info">
+                <span>{topBook.title}</span>
+                <span>{topBook.author}</span>
+                <span>{topBook.author}</span>
+                <span>{topBook.author}</span>
+                <span>{topBook.author}</span>
+                <span>{topBook.author}</span>
+              </div> 
+              <div className="total-box">
+                <div className="total">
+                  <span>{commas(totalData.totalPrice)}원</span>
+                  <span>이 달의 판매금액</span>                
+                </div>
+                <div className="total">
+                  <span>{topBook.title}</span>
+                  <span>이 번주 어쩌구</span>
+                </div> 
+              </div>
+              <div className="total-box">
+                <div className="total">
+                  <span>{commas(totalData.totalCount)}건</span>
+                  <span>이 달의 판매수</span>
+                </div>  
+                <div className="total">
+                  <span>{topBook.title}</span>
+                  <span>이 번주 저쩌구</span>
+                </div> 
+              </div>      
             </div>
-            <p>통계넣기</p>         
-          </div>
-        )      
-      }
-      <div id="lineChart">
-        <LineChart data={lineData} />
+            </StyledTitle>
+          )      
+        }
+        <div id="lineChart">
+          <LineChart data={lineData} />
+        </div>
+      </div>   
+      <div id="pieChart">
+        <PieChart data={pieData} />
       </div>
-    </div>
-    <div id="pieChart">
-      <PieChart data={pieData} />
     </div>
   </div>
   </StyledChart>

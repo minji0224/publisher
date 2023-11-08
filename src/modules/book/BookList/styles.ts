@@ -3,8 +3,8 @@ import styled from "@emotion/styled";
 export const StyledBookList = styled.div`
   div {
     padding: 20px;
-    font-family: "Noto Sans";
   }
+
   h3 {
     margin-top: 0;
     letter-spacing: 1px;
@@ -33,14 +33,13 @@ export const StyledBookList = styled.div`
     height: 50%;
     padding: 20px;
     display: flex;
-    align-items:center
+    align-items: center;
   }
 
   .querybox span {
     display: inline-block;
     width: 100px;
     margin-right: 20px;
-
   }
 
   .querybox select {
@@ -58,23 +57,31 @@ export const StyledBookList = styled.div`
   }
 
   .querybox button {
-    padding: 8px 16px;
+    background-color: white;
+    border-radius: 0.2rem;
     cursor: pointer;
-    background-color: #e4e4e4;
-    color: rgba(0, 0, 0, 0.6);
+    color: black;
     font-size: 14px;
     line-height: 1;
     border: none;
-    margin: 5px;
-    width: 80px;
-    box-shadow: .3rem .3rem .6rem #c8d0e7;, 
-     .2rem -.2rem .5rem #FFFFFF;
+    border: 1px solid gray;
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    align-items: center;
+    margin: 1px;
   }
 
+  .querybox button svg {
+    width: 60%;
+    height: 60%;
+    stroke-width: 15px;
+  }
 
   .querybox button:hover {
-    box-shadow: none;
     border: 1px #fff;
+    background-color: #1d1f20;
+    color: white;
   }
 
   .radiobox {
@@ -111,7 +118,9 @@ export const StyledBookList = styled.div`
   }
 
   .radiobox input:checked + label {
-    background-color: #8fc866;
+    border: 1px #fff;
+    background-color: #1d1f20;
+    color: white;
     box-shadow: none;
   }
 
@@ -148,5 +157,4 @@ export const StyledBookList = styled.div`
   p {
     color: black;
   }
-
 `;

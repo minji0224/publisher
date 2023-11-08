@@ -105,12 +105,12 @@ const BookForm = () => {
           <option value="수험서">수험서</option>
         </select>
       </label>
-      <label><span>도서명</span><input type="text" ref={titleRef}/></label>
+      <label><span>도서명</span><input type="text" ref={titleRef} /></label>
       <label><span>저자</span><input type="text" ref={authorRef}/></label>
-      <label><span>출간일달력?</span><input type="text" ref={pubDateRef}/></label>
-      <label><span>정가</span><input type="text" ref={priceStandardRef}/></label>
-      <label><span>수량</span><input type="text" ref={quantityRef}/></label>   
-      <label><span>isbn번호</span><input type="text" ref={isbnRef}/></label>
+      <label><span>출간일</span><input type="text" ref={pubDateRef} placeholder="ex) 2022-10-10"/></label>
+      <label><span>정가</span><input type="text" ref={priceStandardRef} placeholder="숫자만 입력해주세요."/></label>
+      <label><span>수량</span><input type="text" ref={quantityRef} placeholder="숫자만 입력해주세요."/></label>   
+      <label><span>isbn번호</span><input type="text" ref={isbnRef} placeholder="숫자만 입력해주세요."/></label>
       <label><span>이미지</span><input type="file" multiple accept="image/*, video/*" ref={fileRef} /></label>
       <button type="submit">등록</button>
       </form>

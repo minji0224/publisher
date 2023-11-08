@@ -4,21 +4,37 @@ export const StyledChart = styled.div`
   #container {
     padding: 20px;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
   }
 
   #box {
     display: flex;
-    flex-direction: column;
     margin-right: 20px;
+    justify-content: space-between;
   }
 
-  #div {
+  #box-2 {
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+    justify-content: space-between;
+  }
+
+  h3 {
+    margin-top: 0;
+    letter-spacing: 1px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 1px;
+    font-size: 30px;
+    font-weight: bold;
+  }
+
+  #title {
     height: 200px;
     padding: 10px;
-    margin-bottom: 10px;
-    box-shadow: 0px 0px 22px -8px #808080;
-    border-radius: 10px;
   }
 
   #pieChart {

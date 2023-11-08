@@ -3,31 +3,21 @@ import { BookData, SearchRequset, useBooksData, } from "../bookdata"
 import { StyledBookList } from "./styles";
 import { MutableRefObject, useEffect, useRef, useState } from "react";
 import http from "@/utils/http";
-import { AiOutlineRight,AiOutlineLeft } from "react-icons/ai";
+import { AiOutlineReload,AiOutlineSearch } from "react-icons/ai";
 import PaginationBtn from "@/components/Button";
 
 const BookList = () => {
 
-  const PAGE_SIZE = 18;
+  const PAGE_SIZE = 10;
   const [currentPage, setcurrentPage] = useState(0);
   const [pageBtnLeft, setPageBtnLeft] = useState(false);
   const [pageBtnRight, setPageBtnRight] = useState(true);
   const [totalPage, setTotalPage] = useState(0);
-  const [pageList, setPageList] = useState([]);
 
-  console.log(`현재페이지: ${currentPage}`);
-  console.log(`왼쪽페이지버튼: ${pageBtnLeft}`);
-  console.log(`오른쪽페이지버튼: ${pageBtnRight}`);
-  console.log(`받아온데이터의토탈페이지: ${totalPage}`);
   
   const {data, isValidating} = useBooksData(currentPage, PAGE_SIZE);
   const [searchBooks, setSearchBooks] = useState<BookData[]>([]);
-  console.log(`기존데이터 불러오고 있는지 ${isValidating}`);
-  console.log("---기존데이터");
-  console.log(data);
-  console.log(data.content);
-  console.log("---검색데이터"); 
-  console.log(searchBooks);
+  
 
   // 패처로 받아온 데이터로 토탈페이지 상태값 넣기.
   useEffect(()=> {
@@ -57,6 +47,7 @@ const BookList = () => {
 
   // 검색창 내부 상태관리
   const keywordRef = useRef() as MutableRefObject<HTMLInputElement>;
+  const formRef = useRef() as MutableRefObject<HTMLFormElement>;
 
   const [option, setOption] = useState("title");
   const handleOptionValue = (e) => {
@@ -114,21 +105,21 @@ const BookList = () => {
     })()
   };
 
+  //검색창 리셋 함수 만들기
+  const handleReset = (e: React.FormEvent)=> {
+    e.preventDefault();
+    formRef.current.reset();
+  };
+
 
   
-
-
-
-
- 
   
   
-
   return (
     <StyledBookList>
     <div>
       <h3>Search</h3>
-      <form action="">
+      <form ref={formRef}>
         <div className="radiobox">
           <span>상품등록일</span>
           <input type="radio" name="radio" id="radio-today" value="today" onChange={handleDateValue}/>
@@ -149,8 +140,8 @@ const BookList = () => {
             <option value="isbn" >isbn번호</option>
           </select>
           <input type="text" ref={keywordRef} />
-          <button type="button" onClick={handleSearch}>검색</button>
-          <button>초기화</button>
+          <button type="button" onClick={handleSearch}><AiOutlineSearch/></button>
+          <button onClick={handleReset}><AiOutlineReload/></button>
         </label>
       </form>
        {isValidating ? ( <div>로딩중</div>) : (

@@ -18,7 +18,14 @@ export function Sidebar() {
       {!profileData? (
             <p>로딩중</p>
           ) : (
-            <p>{profileData.publisherName}</p>
+            <div id="profile">
+              <img width="96" height="96" 
+                src="https://img.icons8.com/external-zen-filled-royyan-wijaya/96/external-atom-astronomy-zen-filled-royyan-wijaya.png" 
+                alt="external-atom-astronomy-zen-filled-royyan-wijaya"/>
+                <span>{profileData.publisherName}님</span>
+                <span>환영합니다.</span>
+            </div>
+            
           )      
         }
       </header>
