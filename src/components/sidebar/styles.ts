@@ -14,17 +14,18 @@ export const StyledSidebar = styled.div`
   }
 
   header {
-    border: 1px solid black;
     margin: 0;
     padding: 0;
     padding: 15px;
     line-height: 52px;
-    background-color: #fff;
+    text-align: center;
+    height: 200px;
+    border-bottom: 1px solid #eee;
   }
   header span {
-    border: 1px solid black;
     display: inline-block;
     display: block;
+    font-weight: bold;
   }
   svg {
     width: 25px;
@@ -37,6 +38,11 @@ export const StyledSidebar = styled.div`
     list-style: none;
     padding: 0;
     margin: 0;
+    margin-top: 10px;
+  }
+
+  li {
+    border-bottom: 1px solid #eee;
   }
 
   a {
@@ -46,10 +52,16 @@ export const StyledSidebar = styled.div`
     display: flex;
     align-items: center;
     cursor: pointer;
-    color: black;
+    color: #848697;
+    font-family: "DM Sans";
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-size: 20px;
   }
 
   a:hover {
-    color: gray;
+    color: black;
+    background: rgb(230, 230, 230);
+    color: #7380ec;
   }
 `;

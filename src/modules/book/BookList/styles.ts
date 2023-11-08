@@ -3,20 +3,23 @@ import styled from "@emotion/styled";
 export const StyledBookList = styled.div`
   div {
     padding: 20px;
+    font-family: "Noto Sans";
   }
   h3 {
+    margin-top: 0;
     letter-spacing: 1px;
-    box-shadow: 0px 0px 20px -3px rgba(0, 0, 0, 1);
-    padding: 10px;
     height: 40px;
     border-radius: 10px;
     display: flex;
     align-items: center;
+    letter-spacing: 1px;
+    font-size: 30px;
+    font-weight: bold;
   }
 
   form {
     margin-bottom: 20px;
-    box-shadow: 0px 0px 20px -3px rgba(0, 0, 0, 1);
+    box-shadow: 0px 0px 22px -8px #808080;
     border-radius: 10px;
     height: 150px;
     padding: 0;
@@ -30,13 +33,14 @@ export const StyledBookList = styled.div`
     height: 50%;
     padding: 20px;
     display: flex;
+    align-items:center
   }
 
   .querybox span {
     display: inline-block;
     width: 100px;
     margin-right: 20px;
-    height: 100%;
+
   }
 
   .querybox select {
@@ -60,12 +64,13 @@ export const StyledBookList = styled.div`
     color: rgba(0, 0, 0, 0.6);
     font-size: 14px;
     line-height: 1;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3),
-      0 1px rgba(255, 255, 255, 0.1);
+    border: none;
     margin: 5px;
     width: 80px;
+    box-shadow: .3rem .3rem .6rem #c8d0e7;, 
+     .2rem -.2rem .5rem #FFFFFF;
   }
+
 
   .querybox button:hover {
     box-shadow: none;
@@ -80,7 +85,6 @@ export const StyledBookList = styled.div`
     display: inline-block;
     width: 100px;
     margin-right: 20px;
-    height: 100%;
   }
 
   .radiobox input {
@@ -114,7 +118,7 @@ export const StyledBookList = styled.div`
   table {
     border-collapse: collapse;
     text-align: center;
-    box-shadow: 0px 0px 20px -3px rgba(0, 0, 0, 1);
+    box-shadow: 0px 0px 22px -8px #808080;
     width: 100%;
     border-radius: 10px;
   }
@@ -145,25 +149,4 @@ export const StyledBookList = styled.div`
     color: black;
   }
 
-  #pageBtn {
-    text-align: center;
-  }
-
-  #pageBtn button {
-    padding: 8px 16px;
-    cursor: pointer;
-    background-color: #e4e4e4;
-    color: rgba(0, 0, 0, 0.6);
-    font-size: 14px;
-    line-height: 1;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3),
-      0 1px rgba(255, 255, 255, 0.1);
-    margin: 5px;
-  }
-
-  #pageBtn button:hover {
-    box-shadow: none;
-    border: 1px #fff;
-  }
 `;

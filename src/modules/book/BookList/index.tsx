@@ -3,14 +3,18 @@ import { BookData, SearchRequset, useBooksData, } from "../bookdata"
 import { StyledBookList } from "./styles";
 import { MutableRefObject, useEffect, useRef, useState } from "react";
 import http from "@/utils/http";
+import { AiOutlineRight,AiOutlineLeft } from "react-icons/ai";
+import PaginationBtn from "@/components/Button";
 
 const BookList = () => {
 
-  const PAGE_SIZE = 10;
+  const PAGE_SIZE = 18;
   const [currentPage, setcurrentPage] = useState(0);
   const [pageBtnLeft, setPageBtnLeft] = useState(false);
   const [pageBtnRight, setPageBtnRight] = useState(true);
   const [totalPage, setTotalPage] = useState(0);
+  const [pageList, setPageList] = useState([]);
+
   console.log(`현재페이지: ${currentPage}`);
   console.log(`왼쪽페이지버튼: ${pageBtnLeft}`);
   console.log(`오른쪽페이지버튼: ${pageBtnRight}`);
@@ -109,7 +113,8 @@ const BookList = () => {
       }
     })()
   };
-  
+
+
   
 
 
@@ -122,7 +127,7 @@ const BookList = () => {
   return (
     <StyledBookList>
     <div>
-      <h3>도서재고조회</h3>
+      <h3>Search</h3>
       <form action="">
         <div className="radiobox">
           <span>상품등록일</span>
@@ -199,10 +204,10 @@ const BookList = () => {
       </tbody>
     </table>
     )}
-      <div id="pageBtn">
-        <button onClick={()=>{setcurrentPage(currentPage -1 )}} disabled={!pageBtnLeft}>이전</button>
-        <button onClick={()=>{setcurrentPage(currentPage +1 )}} disabled={!pageBtnRight}>다음</button>
-      </div>
+
+    <PaginationBtn totalPage={totalPage} setcurrentPage={setcurrentPage} currentPage={currentPage}
+      pageBtnLeft={pageBtnLeft} pageBtnRight={pageBtnRight}/>
+       
     </div>
     </StyledBookList>
   )

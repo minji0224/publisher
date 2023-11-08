@@ -15,7 +15,7 @@ function Layout() {
     }
   };
 
-  const profileData = useProfileData();
+
 
 
   return (
@@ -25,12 +25,6 @@ function Layout() {
       <Sidebar />
       <div id="header">
         <header>
-        {!profileData? (
-            <p>로딩중</p>
-          ) : (
-            <p>{profileData.publisherName}님, 환영합니다!</p>
-          )      
-        }
           <button id="logoutBtn"onClick={handleLogout}><AiOutlineUnlock/></button>
         </header>
         <div id="main">

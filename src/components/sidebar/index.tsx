@@ -2,10 +2,12 @@ import { useState } from "react";
 import { StyledSidebar } from "./styles";
 import { AiOutlineUser, AiOutlineHome, AiOutlineSearch, AiOutlinePlus } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { useProfileData } from "@/modules/book/profiledata";
 
 
 
 export function Sidebar() {
+  const profileData = useProfileData();
 
 
   return (
@@ -13,7 +15,12 @@ export function Sidebar() {
 
     <div id="sidebar">
       <header>
-        <h3>출판사이름</h3>
+      {!profileData? (
+            <p>로딩중</p>
+          ) : (
+            <p>{profileData.publisherName}</p>
+          )      
+        }
       </header>
       <ul>
         <li>

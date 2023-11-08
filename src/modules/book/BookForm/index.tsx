@@ -71,7 +71,7 @@ const BookForm = () => {
   return (
     <StyledBookForm>
     <div>
-      <h3>신간도서등록</h3>
+      <h3>New Book Registration</h3>
       <form onSubmit={handleBook} ref={formRef}>
       <label>
         <span>출판사</span>

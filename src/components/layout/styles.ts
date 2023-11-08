@@ -14,12 +14,11 @@ export const StyledLayout = styled.div`
   }
 
   #header header {
-    height: 4rem;
+    height: 2rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: right;
     align-items: center;
-    padding: 0px 20px 0px 20px;
-    padding-top: 0;
+    padding: 0 20px 0 0;
   }
 
   #logoutBtn {
@@ -32,5 +31,13 @@ export const StyledLayout = styled.div`
     width: 100%;
     height: 100%;
     stroke-width: 15px;
+  }
+  #logoutBtn:hover {
+    color: #7380ec;
+    cursor: pointer;
+  }
+
+  main {
+    background-color: #f6f6fc;
   }
 `;

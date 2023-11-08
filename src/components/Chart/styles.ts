@@ -17,7 +17,7 @@ export const StyledChart = styled.div`
     height: 200px;
     padding: 10px;
     margin-bottom: 10px;
-    box-shadow: 0px 0px 20px -3px rgba(0, 0, 0, 1);
+    box-shadow: 0px 0px 22px -8px #808080;
     border-radius: 10px;
   }
 
@@ -26,11 +26,11 @@ export const StyledChart = styled.div`
     height: 630px;
     width: 700px;
     padding: 10px;
-    box-shadow: 0px 0px 20px -3px rgba(0, 0, 0, 1);
+    box-shadow: 0px 0px 22px -8px #808080;
   }
 
   #lineChart {
-    box-shadow: 0px 0px 20px -3px rgba(0, 0, 0, 1);
+    box-shadow: 0px 0px 22px -8px #808080;
     height: 400px;
     width: 850px;
     padding: 10px;

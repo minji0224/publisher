@@ -7,20 +7,22 @@ export const StyledBookForm = styled.div`
   }
 
   h3 {
+    margin-top: 0;
     letter-spacing: 1px;
-    box-shadow: 0px 0px 20px -3px rgba(0, 0, 0, 1);
-    padding: 10px;
     height: 40px;
     border-radius: 10px;
     display: flex;
     align-items: center;
+    letter-spacing: 1px;
+    font-size: 30px;
+    font-weight: bold;
   }
 
   form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 0px 0px 20px -3px rgba(0, 0, 0, 1);
+    box-shadow: 0px 0px 22px -8px #808080;
     border-radius: 10px;
     padding: 20px;
   }
