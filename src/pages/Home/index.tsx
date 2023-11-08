@@ -24,7 +24,7 @@ const Home = () => {
 
   // 파이차트 불러오기
   const[pieData, setPieData] = useState([]);
-  const[topBook, setTopBook] = useState({title: "", author: "", uuid: ""});
+  const[topBook, setTopBook] = useState({title: "", author: "", uuid: "", totalCount: 0});
   const[totalData, setTotalData] = useState({totalCount: 0, totalPrice: 0});
   const pieChartColers = [
     "hsl(13, 70%, 50%)",
@@ -57,7 +57,8 @@ const Home = () => {
         setTopBook({
           title: bestBook.title,
           author: bestBook.author,
-          uuid: bestBook.uuidFilename
+          uuid: bestBook.uuidFilename,
+          totalCount: bestBook.totalCount
         })
 
         const totalCountSum = response.data.reduce((a,b) => a + b.totalCount, 0)
@@ -132,12 +133,14 @@ const Home = () => {
                     src={`http://localhost:8080/books/file/c238ead2-8d9a-43ac-a931-bdd192403e78.jpg`} /> 
               </div>
               <div className="total total-info">
-                <span>{topBook.title}</span>
-                <span>{topBook.author}</span>
-                <span>{topBook.author}</span>
-                <span>{topBook.author}</span>
-                <span>{topBook.author}</span>
-                <span>{topBook.author}</span>
+                <span>이 달의 도서</span>
+                <p>
+                  {topBook.author}작가님의<br />
+                  {topBook.title}가<br />
+                  이 달 {commas(topBook.totalCount)}권<br />
+                  판매되었습니다.
+                </p>
+
               </div> 
               <div className="total-box">
                 <div className="total">

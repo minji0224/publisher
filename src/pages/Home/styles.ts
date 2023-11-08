@@ -14,13 +14,11 @@ export const StyledTitle = styled.div`
     flex-direction: column;
     margin-right: 16px;
     height: 30%;
-    padding: 5px;
     flex: 1;
-    /* border: 1px solid black; */
   }
 
   .total span:first-child {
-    font-size: 30px;
+    font-size: 26px;
     line-height: 32px;
     font-weight: 700;
   }
@@ -56,7 +54,7 @@ export const StyledTitle = styled.div`
     padding: 0;
   }
 
-  .total-info span {
-    margin-bottom: 10px;
+  .total-info p {
+    line-height: 1.8;
   }
 `;
