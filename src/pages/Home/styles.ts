@@ -17,7 +17,7 @@ export const StyledTitle = styled.div`
     flex: 1;
   }
 
-  .total span:first-child {
+  .total span:first-of-type {
     font-size: 26px;
     line-height: 32px;
     font-weight: 700;
