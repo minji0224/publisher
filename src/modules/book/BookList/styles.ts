@@ -115,6 +115,9 @@ export const StyledBookList = styled.div`
   .radiobox label:hover {
     box-shadow: none;
     border: 1px #fff;
+    background-color: #1d1f20;
+    color: white;
+    font-weight: 600;
   }
 
   .radiobox input:checked + label {
@@ -145,8 +148,10 @@ export const StyledBookList = styled.div`
   tr:hover td {
     border-bottom: 1px solid #fff;
     border-right: 1px solid #fff;
-    background-color: #e0e0e0;
-    cursor: pointer;
+    /* background-color: #e0e0e0; */
+    background-color: #1d1f20;
+    color: white;
+    /* cursor: pointer; */
   }
 
   td {

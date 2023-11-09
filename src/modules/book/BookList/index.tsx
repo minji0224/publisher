@@ -8,6 +8,9 @@ import PaginationBtn from "@/components/Button";
 
 const BookList = () => {
 
+
+  
+
   const PAGE_SIZE = 10;
   const [currentPage, setcurrentPage] = useState(0);
   const [pageBtnLeft, setPageBtnLeft] = useState(false);
@@ -23,6 +26,7 @@ const BookList = () => {
   useEffect(()=> {
     if(data) {
       setTotalPage(data.totalPages)
+      console.log(data);
     }
   }, [data])
 

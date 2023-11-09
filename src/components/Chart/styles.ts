@@ -9,7 +9,6 @@ export const StyledChart = styled.div`
 
   #box {
     display: flex;
-    margin-right: 20px;
     justify-content: space-between;
   }
 

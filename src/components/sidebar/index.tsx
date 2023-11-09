@@ -22,8 +22,11 @@ export function Sidebar() {
               <img width="96" height="96" 
                 src="https://img.icons8.com/external-zen-filled-royyan-wijaya/96/external-atom-astronomy-zen-filled-royyan-wijaya.png" 
                 alt="external-atom-astronomy-zen-filled-royyan-wijaya"/>
-                <span>{profileData.publisherName}님</span>
-                <span>환영합니다.</span>
+                <p>
+                  {profileData.publisherName}출판사님<br />
+                  환영합니다.
+                </p>
+
             </div>
             
           )      

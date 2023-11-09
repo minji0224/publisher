@@ -21,11 +21,17 @@ const Home = () => {
 
   // 프로필 정보 불러오기
   const profileData = useProfileData();
+  console.log(profileData);
+  
 
   // 파이차트 불러오기
   const[pieData, setPieData] = useState([]);
   const[bestBook, setBestBook] = useState({title: "", author: "", uuid: "", totalCount: 0});
   const[totalData, setTotalData] = useState({totalCount: 0, totalPrice: 0});
+  console.log(bestBook);
+  console.log("!!!");
+  
+  
   const pieChartColers = [
     "hsl(13, 70%, 50%)",
     "hsl(260, 70%, 50%)",

@@ -81,4 +81,11 @@ export const StyledBookForm = styled.div`
     margin: 5px;
     border-radius: 10px;
   }
+
+  button:hover {
+    border: 1px #fff;
+    background-color: #1d1f20;
+    color: white;
+    font-weight: 600;
+  }
 `;

@@ -38,6 +38,15 @@ const BookForm = () => {
     const formData = new FormData();
     formData.append("file", fileRef.current.files[0]);
 
+    if(!titleRef.current.value || !authorRef.current.value|| !pubDateRef.current.value || !priceStandardRef.current.value ||
+        !quantityRef.current.value|| !isbnRef.current.value) {
+        return alert("모두 입력해주세요.");
+      }
+
+    if(/[^0-9]/.test(priceStandardRef.current.value) || /[^0-9]/.test(quantityRef.current.value) || /[^0-9]/.test(isbnRef.current.value)) {
+      return alert("숫자만 입력해주세요.");
+    };
+
     const createRequest = {
       publisher: profileData.publisherName,
       categoryName: categoryName,
@@ -63,6 +72,8 @@ const BookForm = () => {
         console.log(books);
         
         navigate("/")        
+      } else {
+        return alert("다시 입력해주세요.");
       }
     })();
   }

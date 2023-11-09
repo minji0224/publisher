@@ -17,16 +17,12 @@ export const StyledSidebar = styled.div`
     margin: 0;
     padding: 0;
     padding: 15px;
-    line-height: 52px;
+    line-height: 40px;
     text-align: center;
-    height: 200px;
+    height: 250px;
     border-bottom: 1px solid #eee;
   }
-  header span {
-    display: inline-block;
-    display: block;
-    font-weight: bold;
-  }
+
   svg {
     width: 25px;
     height: 25px;
@@ -59,17 +55,21 @@ export const StyledSidebar = styled.div`
   }
 
   a:hover {
-    color: black;
     background: rgb(230, 230, 230);
     color: #7380ec;
+  }
+
+  #profile {
+    width: 100%;
+    height: 100%;
   }
 
   #profile img {
     margin-top: 20px;
   }
 
-  #profile span {
-    height: 30px;
-    padding: 0;
+  #profile p {
+    height: 100px;
+    font-weight: bold;
   }
 `;
