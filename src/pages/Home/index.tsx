@@ -27,11 +27,7 @@ const Home = () => {
   // 파이차트 불러오기
   const[pieData, setPieData] = useState([]);
   const[bestBook, setBestBook] = useState({title: "", author: "", uuid: "", totalCount: 0});
-  const[totalData, setTotalData] = useState({totalCount: 0, totalPrice: 0});
-  console.log(bestBook);
-  console.log("!!!");
-  
-  
+  const[totalData, setTotalData] = useState({totalCount: 0, totalPrice: 0}); 
   const pieChartColers = [
     "hsl(13, 70%, 50%)",
     "hsl(260, 70%, 50%)",
@@ -39,6 +35,7 @@ const Home = () => {
     "hsl(172, 70%, 50%)",
     "hsl(138, 70%, 50%)"
   ];
+
   useEffect(()=> {
 
     (async()=> {
@@ -54,12 +51,11 @@ const Home = () => {
           value: item.totalCount,
           color: pieChartColers[inx],
         }));     
-        console.log(result);
+   
+        setPieData([...result]);
 
         // 제일 많이 판매된 책
         const bestBook = response.data.reduce((a,b) =>(a.totalCount > b.totalCount? a: b))
-        
-        setPieData([...result]);
         setBestBook({
           title: bestBook.title,
           author: bestBook.author,
@@ -67,17 +63,13 @@ const Home = () => {
           totalCount: bestBook.totalCount
         })
 
+        // 이번달 총 판매 데이터 (이름 다시 짓긴 해야 됨)
         const totalCountSum = response.data.reduce((a,b) => a + b.totalCount, 0)
         const totalPriceSum = response.data.reduce((a,b)=> a + (b.priceSales * b.totalCount), 0)
-
         setTotalData({
           totalCount: totalCountSum,
           totalPrice: totalPriceSum
-        })
-        
-
-        
-
+        });
         
       } catch (e: any) {
         console.log("파이차트에러");
@@ -107,11 +99,10 @@ const Home = () => {
           }
         ];
           
-        console.log(result);
         setLineData([...result]);
 
 
-
+        // 7일 가져온 데이터에서 이번주 날짜만 뽑아서 금주 데이터 만들기
         const currentWeekStartDate = new Date();
         const currentWeekEndDate = new Date();
         
@@ -120,9 +111,7 @@ const Home = () => {
 
         currentWeekStartDate.setHours(0, 0, 0, 0); // 시간 빼고 날짜만
         currentWeekEndDate.setHours(0, 0, 0, 0); // 시간 빼고 날짜만
-
-        
-        
+       
         const currentWeekData = response.data.filter(i => {
           const saleDate = new Date(i.saleDate);
           return saleDate >= currentWeekStartDate && saleDate <= currentWeekEndDate;
@@ -130,8 +119,7 @@ const Home = () => {
 
         const totalCountSum = currentWeekData.reduce((a,b) => a + b.totalCount, 0);
         const totalPriceSum  = currentWeekData.reduce((a,b) => a + b.totalPrice, 0);
-
-        
+       
         setTopWeekData({totalCount: totalCountSum, totalPrice:totalPriceSum});
         
       }catch(e:any) {
@@ -140,7 +128,7 @@ const Home = () => {
     })();
   }, []);
 
-  // 토탈 숫자에 , 붙이기
+  // 판매금액에 , 붙이기
   function commas(num) {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }

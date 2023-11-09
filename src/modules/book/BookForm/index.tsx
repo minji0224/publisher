@@ -6,6 +6,12 @@ import axios from "axios";
 import{ProfileData, useProfileData} from "../profiledata"
 import { getCookie } from "@/utils/cookie";
 import http from "@/utils/http";
+import CalendarCommon from "@/components/Date";
+import DatePicker from 'react-datepicker'; 
+import { ko } from 'date-fns/esm/locale';
+import "react-datepicker/dist/react-datepicker.css";
+
+
 
 const BookForm = () => {
 
@@ -78,7 +84,7 @@ const BookForm = () => {
     })();
   }
 
-
+  const [startDate, setStartDate] = useState<Date | null>(new Date());
   return (
     <StyledBookForm>
     <div>
@@ -118,14 +124,13 @@ const BookForm = () => {
       </label>
       <label><span>도서명</span><input type="text" ref={titleRef} /></label>
       <label><span>저자</span><input type="text" ref={authorRef}/></label>
-      <label><span>출간일</span><input type="text" ref={pubDateRef} placeholder="ex) 2022-10-10"/></label>
+      <label><span>출간일</span><input type="text" ref={pubDateRef} placeholder="ex) 2022-10-10"/></label> 
       <label><span>정가</span><input type="text" ref={priceStandardRef} placeholder="숫자만 입력해주세요."/></label>
       <label><span>수량</span><input type="text" ref={quantityRef} placeholder="숫자만 입력해주세요."/></label>   
       <label><span>isbn번호</span><input type="text" ref={isbnRef} placeholder="숫자만 입력해주세요."/></label>
       <label><span>이미지</span><input type="file" multiple accept="image/*, video/*" ref={fileRef} /></label>
       <button type="submit">등록</button>
-      </form>
-      
+      </form>     
     </div>
     </StyledBookForm>
   )
