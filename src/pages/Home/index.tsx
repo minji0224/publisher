@@ -81,6 +81,8 @@ const Home = () => {
   // 라인차트 불러오기
   const [lineData, setLineData] = useState([]);
   const [TopWeekData, setTopWeekData] = useState({totalCount: 0, totalPrice: 0});
+  console.log(TopWeekData);
+  
   useEffect(()=> {
     (async()=> {
       try{
@@ -102,7 +104,7 @@ const Home = () => {
         setLineData([...result]);
 
 
-        // 7일 가져온 데이터에서 이번주 날짜만 뽑아서 금주 데이터 만들기
+        // 라인차트에서 가져온 데이터에서 이번주 날짜만 뽑아서 금주 데이터 만들기
         const currentWeekStartDate = new Date();
         const currentWeekEndDate = new Date();
         
@@ -111,9 +113,11 @@ const Home = () => {
 
         currentWeekStartDate.setHours(0, 0, 0, 0); // 시간 빼고 날짜만
         currentWeekEndDate.setHours(0, 0, 0, 0); // 시간 빼고 날짜만
-       
+     
         const currentWeekData = response.data.filter(i => {
           const saleDate = new Date(i.saleDate);
+          console.log(saleDate);          
+        
           return saleDate >= currentWeekStartDate && saleDate <= currentWeekEndDate;
         });
 
@@ -159,7 +163,7 @@ const Home = () => {
                 <span>이달의 도서</span>
                 <p>
                   {bestBook.author}작가님의<br />
-                  {bestBook.title}가<br />
+                  {bestBook.title}(이)가<br />
                   이 달 {commas(bestBook.totalCount)}권<br />
                   판매되었습니다.
                 </p>

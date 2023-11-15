@@ -88,4 +88,8 @@ export const StyledBookForm = styled.div`
     color: white;
     font-weight: 600;
   }
+
+  /* .input-2 {
+    width: 200px;
+  } */
 `;
