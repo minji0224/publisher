@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { ProvidePlugin } = require("webpack");
-
+const { env } = require("process");
+const {BundleAnalyzerPlugin} = require("webpack-bundle-analyzer");
 
 /** @type {import('webpack').Configuration} */
 module.exports = {
@@ -22,10 +23,6 @@ module.exports = {
         },
       },
       {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
-      },
-      {
         test: /\.(gif|jpg|png|webp|svg|mp4)$/,
         type: "asset/resource",
       }
@@ -41,15 +38,40 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index.html",
-      inject: "body",
     }),
     new ProvidePlugin({
       React: "react",
     }),
-  ],
+    
+    //  // 번들 분석기
+    //  !env.WEBPACK_SERVE
+    //  ? new BundleAnalyzerPlugin({
+    //      analyzerMode: "static",
+    //      openAnalyzer: false,
+    //    })
+    //  : null,
+    env.WEBPACK_SERVE
+    ? null
+    : new BundleAnalyzerPlugin({
+        analyzerMode: "static",
+        openAnalyzer: false,
+      }),
+  ].filter(Boolean),
+
+  
   devServer: {
     historyApiFallback: true,
     static: "./dist",
     open: true,
+  },
+  // 소스맵 최적화
+  devtool: env.WEBPACK_SERVE
+    ? "eval-cheap-module-source-map"
+    : false,
+  // 빌드 캐시 최적화
+  cache: {
+    type: env.WEBPACK_SERVE
+      ? "memory"
+      : "filesystem",
   },
 };

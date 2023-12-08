@@ -2,7 +2,7 @@ import axios from "axios";
 import { config } from "webpack";
 import { getCookie } from "./cookie";
 
-const http = axios.create({ baseURL: "http://localhost:8081/api" });
+const http = axios.create({ baseURL: `${getDomain()}/api` });
 
 http.interceptors.request.use((config) => {
   const token = getCookie("token");

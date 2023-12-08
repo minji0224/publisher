@@ -19,7 +19,7 @@ const Home = () => {
   // 로그인 안되어있을 때
   const token = getCookie("token");
   if (!token) {
-    window.location.href = "http://localhost:5000/login";
+    window.location.href = `http://localhost:5000/login`;
   } 
 
   // 프로필 정보 불러오기
