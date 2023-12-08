@@ -1,1 +1,0 @@
-(()=>{"use strict";document.body.textContent="Hello, TypeScript!"})();

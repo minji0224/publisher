@@ -4,7 +4,7 @@ import useSWR, { mutate } from "swr";
 
 const INIT_DATA: BookData[] = [];
 const BOOK_DATA_KEY = "/books";
-const bookApi = axios.create({ baseURL: "http://localhost:8080" });
+const bookApi = axios.create({ baseURL: "http://localhost:8081/api" });
 
 export interface BookData {
   id: number;

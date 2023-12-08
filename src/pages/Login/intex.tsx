@@ -8,7 +8,7 @@ const Login = () => {
     <StyledLogin>
     <div id="body">
       <div id="box">
-      <form action="http://localhost:8080/auth/signin" method="post">
+      <form action="http://localhost:8081/api/auth/signin" method="post">
         <label><AiOutlineLock /><input type="text" name="publisherName" placeholder="출판사명"  /></label>
         <label><AiOutlineUser /><input type="password" name="password" placeholder="패스워드" /></label>
         <button>로그인</button>

@@ -57,7 +57,7 @@ const BookList = () => {
   const handleOptionValue = (e) => {
     setOption(e.target.value);
   }
-  const [date, setDate] = useState();
+  const [date, setDate] = useState("");
   const handleDateValue = (e) => {
     setDate(e.target.value);
   }

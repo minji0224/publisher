@@ -40,7 +40,7 @@ const Home = () => {
 
     (async()=> {
       try {
-        const response = await http.get<PieChartData[]>("http://localhost:8080/chart/pieChart")
+        const response = await http.get<PieChartData[]>("http://localhost:8081/api/chart/pieChart")
         console.log("파이차트");
         
         console.log(response.data);
@@ -87,7 +87,7 @@ const Home = () => {
     (async()=> {
       try{
 
-        const response = await http.get<LineChartData[]>("http://localhost:8080/chart/lineChart")
+        const response = await http.get<LineChartData[]>("http://localhost:8081/api/chart/lineChart")
         console.log(response.data);
 
         const result = [
@@ -157,7 +157,7 @@ const Home = () => {
             <div id="title">
               <div className="total imgDiv">
                   <img 
-                    src={`http://localhost:8080/books/file/c238ead2-8d9a-43ac-a931-bdd192403e78.jpg`} /> 
+                    src={`http://localhost:8081/api/books/file/b9d8c5e1-f198-412d-b299-a857d2f2c571.jpg`} /> 
               </div>
               <div className="total total-info">
                 <span>이달의 도서</span>

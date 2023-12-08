@@ -14,7 +14,7 @@ export function useProfileData() {
     (async () => {
       try {
         const response = await http.get<ProfileData>(
-          "http://localhost:8080/profile"
+          "http://localhost:8081/api/profile"
         );
         console.log(response.data);
         setProfileData(response.data);
