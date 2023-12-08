@@ -31,3 +31,12 @@ http.interceptors.response.use(
 );
 
 export default http;
+
+export function getDomain() {
+  const currentDomian = window.location.hostname;
+  if (currentDomian === "localhost") {
+    return `http://${currentDomian}:8081`;
+  } else {
+    return `https://${currentDomian}`;
+  }
+}

@@ -8,10 +8,13 @@ import http from "@/utils/http";
 import { useEffect, useState } from "react";
 import { StyledTitle } from "./styles";
 import { useBooksData } from "@/modules/book/bookdata";
+import { getDomain } from "@/utils/http";
 
 
 
 const Home = () => {
+  console.log(`메인페이지-현재도메인:${getDomain()}`);
+  
 
   // 로그인 안되어있을 때
   const token = getCookie("token");
@@ -40,7 +43,7 @@ const Home = () => {
 
     (async()=> {
       try {
-        const response = await http.get<PieChartData[]>("http://localhost:8081/api/chart/pieChart")
+        const response = await http.get<PieChartData[]>(`${getDomain()}/api/chart/pieChart`)
         console.log("파이차트");
         
         console.log(response.data);
@@ -87,7 +90,7 @@ const Home = () => {
     (async()=> {
       try{
 
-        const response = await http.get<LineChartData[]>("http://localhost:8081/api/chart/lineChart")
+        const response = await http.get<LineChartData[]>(`${getDomain()}/api/chart/lineChart`)
         console.log(response.data);
 
         const result = [
@@ -157,7 +160,7 @@ const Home = () => {
             <div id="title">
               <div className="total imgDiv">
                   <img 
-                    src={`http://localhost:8081/api/books/file/b9d8c5e1-f198-412d-b299-a857d2f2c571.jpg`} /> 
+                    src={`${getDomain()}/api/books/file/b9d8c5e1-f198-412d-b299-a857d2f2c571.jpg`} /> 
               </div>
               <div className="total total-info">
                 <span>이달의 도서</span>

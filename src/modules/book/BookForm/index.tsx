@@ -6,11 +6,13 @@ import axios from "axios";
 import{ProfileData, useProfileData} from "../profiledata"
 import { getCookie } from "@/utils/cookie";
 import http from "@/utils/http";
+import { getDomain } from "@/utils/http";
 
 
 
 
 const BookForm = () => {
+  console.log(`신간도서페이지-현재도메인:${getDomain()}`);
 
   const navigate = useNavigate();
 
@@ -63,9 +65,8 @@ const BookForm = () => {
     formData.append("createRequest", new Blob([JSON.stringify(createRequest)],{ type: "application/json" } ));
 
     (async()=> {
-      const response = await http.post<BookData>("books/with-file", formData);
+      const response = await http.post<BookData>(`${getDomain()}/api/books/with-file`, formData);
       console.log(response);
-
 
       if(response.status === 201) {
         console.log("201");

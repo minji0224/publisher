@@ -5,8 +5,10 @@ import { MutableRefObject, useEffect, useRef, useState } from "react";
 import http from "@/utils/http";
 import { AiOutlineReload,AiOutlineSearch } from "react-icons/ai";
 import PaginationBtn from "@/components/Button";
+import { getDomain } from "@/utils/http";
 
 const BookList = () => {
+  console.log(`도서리스트-현재도메인:${getDomain()}`);
 
 
   
@@ -79,8 +81,8 @@ const BookList = () => {
     (async()=> {
 
       try{
-        const response = await http.post("books/paging/search", searchRequest)
-        console.log(response.data);
+        const response = await http.post(`${getDomain()}/api/books/paging/search`, searchRequest)
+        console.log(response.data);        
         if(response.data.content.length === 0){
           alert("검색결과가 없습니다.")
         }

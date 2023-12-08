@@ -1,5 +1,6 @@
 import http from "@/utils/http";
 import { useEffect, useState } from "react";
+import { getDomain } from "@/utils/http";
 
 export interface ProfileData {
   id?: number;
@@ -9,13 +10,16 @@ export interface ProfileData {
 }
 
 export function useProfileData() {
+  console.log(`프로필-현재도메인:${getDomain()}`);
+
   const [profiledata, setProfileData] = useState<ProfileData>();
   useEffect(() => {
     (async () => {
       try {
         const response = await http.get<ProfileData>(
-          "http://localhost:8081/api/profile"
+          `${getDomain()}/api/profile`
         );
+
         console.log(response.data);
         setProfileData(response.data);
       } catch (e: any) {
