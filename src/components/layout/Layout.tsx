@@ -5,13 +5,25 @@ import { Sidebar } from "../sidebar/index";
 import { ProfileData, useProfileData } from "@/modules/book/profiledata";
 import http from "@/utils/http";
 import { AiOutlineUnlock } from "react-icons/ai";
+import { getDomain } from "@/utils/http";
+import { getDate } from "date-fns";
+
+
 function Layout() {
+
 
   const handleLogout = () => {
     const ask = confirm("로그아웃 하시겠습니까?");
     if(ask) {
-      document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";        
-      window.location.replace("/login");
+
+      if(getDomain().includes("localhost")) {
+        document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";        
+        window.location.replace("/Login");
+      } else {
+        document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=d2wuhbzv4h0zv6.cloudfront.net;";
+        window.location.replace("/Login");
+      }
+
     }
   };
 
